@@ -1,1 +1,65 @@
-<p>login works!</p>
+
+<app-error [servError]="servError"></app-error>
+
+
+
+<div class="shadow-2xl max-w-4xl mx-auto " style="background-color: #E9F0FF;">
+
+    <form class="m-10" [formGroup]="LoginForm" (ngSubmit)="LoginSubmit()">
+        <img class=" mb-10 w-full h-auto max-w-xl rounded-lg" src="../../../../../assets/images/freshcart-logo.svg">
+        <h1 class="text-2xl">Login Now :</h1>
+    
+        <div class="mb-5">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email:</label>
+            <input type="email" id="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="example@example.com" required formControlName="email" />
+    
+            @if (LoginForm.get("email")?.errors && LoginForm.get("email")?.touched)
+            {
+                @if (LoginForm.get("email")?.getError("required") && LoginForm.get("email")?.dirty)
+                {
+                <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <span class="block sm:inline">Email is Required.</span>
+                </div>
+                }
+                @else if (LoginForm.get("email")?.getError("email"))
+                {
+                <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <span class="block sm:inline">The email must have email signature </span>
+                </div>
+                }
+            }
+        </div>
+    
+    
+    
+        <div class="mb-5">
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+            <input type="password" id="password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required formControlName="password" />
+    
+            @if (LoginForm.get("password")?.errors && LoginForm.get("password")?.touched)
+            {
+            @if (LoginForm.get("password")?.getError("required") && LoginForm.get("password")?.dirty)
+            {
+            <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">password is Required.</span>
+            </div>
+            }
+            }
+        </div>
+        
+        <div class="flex justify-center flex-wrap  gap-20  md:space-x-60 ">
+            <div>
+                <a routerLink="ForgetPassword" >Forget your password</a>
+            </div>
+            <div>
+                <button [disabled]="isLoading" [disabled]="LoginForm.invalid" type="button" type="submit"
+                    class=" focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Register</button>
+            </div>
+        </div>
+    
+    </form>
+</div>

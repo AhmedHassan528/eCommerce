@@ -1,1 +1,21 @@
-<p>home works!</p>
+
+<div class="flex space-x-8 flex-wrap mx-32 justify-center">
+        @for (item of Products; track $index) {
+        <div class=" max-w-56 mt-3">
+            <div>
+                <img src="{{item.imageCover}}" >
+            </div>
+            <p class="text-sm" style="color: #0aad0a;">{{item.category.name}}</p>
+            <p class="text-md">{{item.title.slice(0,15)}}...</p>
+        
+            <div class="flex justify-between">
+                <div>
+                    {{item.price}} EGY
+                </div>
+                <div>
+                    {{item.ratingsAverage}}
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,14 +1,30 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../../../core/services/Auth-Service/auth.service';
+import { ErrorComponent } from '../../../additions/Errors/error/error.component';
+import { SucceedComponent } from "../../../additions/Errors/succeed/succeed.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ErrorComponent, SucceedComponent],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrls: ['./register.component.scss', '../../../../app.component.scss']
 })
 export class RegisterComponent {
+  servError: string | null = null;
+  succeed: boolean = false;
+  isLoading = false;
+
+  setError(message: string) {
+    this.servError = message;
+  }
+
+
+
+  constructor(private _authService: AuthService, private _Router:Router) { }
+
   registerForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
 
@@ -18,9 +34,36 @@ export class RegisterComponent {
     rePassword: new FormControl(null, [Validators.required, Validators.pattern(/^\w{6,}$/)]),
 
     phone: new FormControl(null, [Validators.required]),
-  });
+  }, this.confirmPass);
 
   registerSubmit() {
-    console.log(this.registerForm);
+    this.isLoading = true;
+    this._authService.RegisterUser(this.registerForm.value).subscribe({
+      next: (res) => {
+        console.log(res);
+
+        setTimeout(() => {
+          this._Router.navigate(['/login']);
+        }, 2000);
+        this.succeed = true;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.succeed = false;
+        this.setError(err.error.message);
+        this.isLoading = false;
+        console.log(err);
+      }
+    });
   }
+
+  confirmPass(g : AbstractControl) {
+    if (g.get('password')?.value == g.get('rePassword')?.value) {
+      return null;
+    }else {
+      return {mismatch: true};
+    }
+  }
+
 }
+
