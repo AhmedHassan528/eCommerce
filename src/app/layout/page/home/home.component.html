@@ -1,21 +1,112 @@
+<!--Alerts-->
+@if (succeed == true) {
+    <app-succeed [SucceedMesg]= "ServMessage" ></app-succeed>
+}
+@if (succeed == false) {
+    <app-error  [servError]="ServMessage"></app-error>
+}
 
-<div class="flex space-x-8 flex-wrap mx-32 justify-center">
-        @for (item of Products; track $index) {
-        <div class=" max-w-56 mt-3">
+
+<!-- carousel -->
+<section>
+    <div class="grid grid-cols-3">
+        <div class="md:col-span-2 col-span-3">
+            <owl-carousel-o [options]="MaincustomOptions" class="mainSlider">
+                <ng-template carouselSlide><img src="./assets/images/main-slider-1.jpg" alt=""></ng-template>  
+                <ng-template carouselSlide><img src="./assets/images/main-slider-2.jpeg" alt=""></ng-template>  
+                <ng-template carouselSlide><img src="./assets/images/main-slider-3.jpeg" alt=""></ng-template>  
+            </owl-carousel-o>
+        </div>
+        <div class="md:col-span-1 md:block hidden">
             <div>
-                <img src="{{item.imageCover}}" >
-            </div>
-            <p class="text-sm" style="color: #0aad0a;">{{item.category.name}}</p>
-            <p class="text-md">{{item.title.slice(0,15)}}...</p>
-        
-            <div class="flex justify-between">
-                <div>
-                    {{item.price}} EGY
-                </div>
-                <div>
-                    {{item.ratingsAverage}}
-                </div>
+                <img src="./assets/images/slider-image-1.jpeg" alt="">
+                <img src="./assets/images/slider-image-2.jpeg" alt="">
             </div>
         </div>
+    </div>
+</section>
+
+<!--Categories-->
+<owl-carousel-o [options]="customOptions">
+    
+    @for (item of Categories; track item._id) {
+        <ng-template carouselSlide>
+            <img [src]="item.image" class=" lg:h-64 lg:w-40 md:h-40 h-20 w-full" [alt]="item.name">
+            <h4 class="text-xs flex justify-center">{{item.name}}</h4>
+        </ng-template>
     }
+
+</owl-carousel-o>
+
+<!--Search-->
+
+<div class="max-w-md mx-auto">   
+    <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+        </div>
+        <input [(ngModel)]="SearchWords" type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-400 focus:border-green-700" placeholder="Search products" required />
+    </div>
 </div>
+
+
+
+<!-- products -->
+<section class=" md:grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 md:gap-4 ">
+    @for (item of Products | kMPSearch : SearchWords; track item._id) {
+    <div> 
+        <div class=" card-Product product md:col-span-1 col-span-12 my-3 relative">
+            <div  class=" p-2 md:block flex  justify-between">
+                <img [routerLink]="['/Details', item._id]" src="{{item.imageCover}}" class="md:w-full w-1/3">
+                <div class="flex">
+                    <div [routerLink]="['/Details', item._id]" class="md:ml-0 md:w-full md:content-stretch ml-2 w-2/3 ">
+                        <p class="text-sm main-text-color">{{item.category.name | lowercase }}</p>
+                        <p class="text-md">{{item.title | termtext : 2 | titlecase}} ...</p>
+                    </div>
+                    <div >
+                        <!-- [ngStyle]="{'color': WishListIDs.includes(item._id) ? 'red' : 'grey'}" -->
+                        @if (WishListIDs?.includes(item._id)) {
+                            <button (click)="removeFromWishList(item._id)">
+                                <fa-icon size="xl" [icon]="faHeart" style="color:red;" ></fa-icon>
+                            </button>
+                        }@else {
+                            <button (click)="addToWishList(item._id)">
+                                <fa-icon size="xl" [icon]="faHeart" ></fa-icon>
+                            </button>
+                        }
+                        
+                    </div>
+                </div>
+    
+                <div [routerLink]="['/Details', item._id]" class=" 2xl:flex md:mt-3 md:justify-between md:content-center content-center ">
+                    <span>
+                        {{item.price | currency: 'EGP'}}
+                    </span>
+                    <div class="2xl:mt-0 2xl:block md:mt-4 md:flex md:justify-end md:min-w-0 min-w-32 mt-11">
+                            @for (item of [1,2,3,4,5].slice(0, item.ratingsAverage); track $index) {
+                            <fa-icon style="color: #FFD700;" [icon]="faStar"></fa-icon>
+                            }
+                            @if (item.ratingsAverage % 1 != 0) {
+                            <fa-icon style="color: #FFD700;" [icon]="faStarHalf"></fa-icon>
+                            }
+                            {{item.ratingsAverage}}
+                    </div>
+    
+                </div>
+            </div>
+            <div class="md:static md:flex md:justify-center absolute bottom-2 right-40 ">
+                <button [disabled]="AddLoading == true " (click)="addToCart(item._id)" type="button" class=" btn-main slide-in-right">
+                    @if (AddLoading == true && itemId == item._id) {
+                        <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon>
+                        Add To Card
+                    }@else {
+                        Add To Card
+                    }
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+</section>

@@ -1,9 +1,9 @@
 
 
-@if (succeed) {
+@if (succeed == true) {
     <app-succeed [SucceedMesg]="'Thank You!'"></app-succeed>
 }
-@if (!succeed) {
+@if (succeed != false) {
     <app-error  [servError]="servError"></app-error>
 }
 

@@ -26,6 +26,23 @@ export class AuthService {
     }
   }
 
+  forgotPasswords (user: object): Observable<any> {
+    {
+      return this._httpClient.post(`${RouteUrl}/api/v1/auth/forgotPasswords`, user)
+    }
+  }
+  ResetCode (user: object): Observable<any> {
+    {
+      return this._httpClient.post(`${RouteUrl}/api/v1/auth/verifyResetCode`, user)
+    }
+  }
+  ResetPassword (user: object): Observable<any> {
+    {
+      return this._httpClient.post(`${RouteUrl}/api/v1/auth/verifyResetCode`, user)
+    }
+  }
+
+
   SignOut(){
     {
       if (localStorage.getItem('userToken')) {
@@ -34,6 +51,7 @@ export class AuthService {
         console.log('No token found');
     }
   }
+
 }
 
   getToken(): string | null {

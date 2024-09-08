@@ -5,11 +5,12 @@ import { FlowbiteService } from './core/services/FlowBite/flowbite-service.servi
 import { NavBarComponent } from "./layout/additions/nav-bar/nav-bar.component";
 import { FooterComponent } from "./layout/additions/footer/footer.component";
 import RouteUrl from './BaseUrl';
+import { NgxSpinnerComponent } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavBarComponent, FooterComponent],
+  imports: [RouterOutlet, NavBarComponent, FooterComponent, NgxSpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

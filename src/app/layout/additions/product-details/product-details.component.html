@@ -1,0 +1,36 @@
+<section>
+    <div class="grid grid-cols-12 gap-6">
+        <div class=" md:col-span-5 col-span-12">
+            <!-- class=" lg:h-64 lg:w-40 md:h-40 h-20 w-full" -->
+            <owl-carousel-o  [options]="customOptions">
+    
+                @for (image of getDetails.images; track getDetails._id) {
+                    <ng-template carouselSlide>
+                        <img [src]="image" [alt]="getDetails.title">
+                    </ng-template>
+                }
+            
+            </owl-carousel-o>
+        </div>
+
+        <div class="md:p-0 md:col-span-7 col-span-12 p-10 content-center">
+            <h1 class="mb-4 text-main text-2xl">{{getDetails.title}}</h1>
+            <h3 class="mb-5 text-gray-500">{{getDetails.description}}</h3>
+            <button [routerLink]="['/brands']" class="mb-2 font-semibold">{{Brand}}</button>
+            <div class="flex justify-between">
+                <p  class="text-lg">{{getDetails.price}}EGY</p>
+
+                <div>
+                    @for (item of [1,2,3,4,5].slice(0, getDetails.ratingsAverage); track $index) {
+                    <fa-icon style="color: #FFD700;" [icon]="faStar"></fa-icon>
+                    }
+                    @if (getDetails.ratingsAverage % 1 != 0) {
+                    <fa-icon style="color: #FFD700;" [icon]="faStarHalf"></fa-icon>
+                    }
+                    {{getDetails.ratingsAverage}}
+                </div>
+            </div>
+            <button class="btn-main w-full" type="button">add to cart</button>
+        </div>
+    </div>
+</section>

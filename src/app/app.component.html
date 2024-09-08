@@ -2,8 +2,13 @@
 
 <div class="flex flex-col justify-between min-h-screen">
     <app-nav-bar/>
+    <div class="container mx-auto">
+        <router-outlet></router-outlet>
+    </div>
 
-    <router-outlet></router-outlet>
+    
 
     <app-footer/>
 </div>
+
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>

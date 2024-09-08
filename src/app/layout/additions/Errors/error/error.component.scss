@@ -13,3 +13,9 @@
 .slide-in-right {
     animation: slideInRight .8s ease-out;
 }
+
+.alrts{
+    position: fixed;
+    z-index: 999;
+    left: 0;
+}

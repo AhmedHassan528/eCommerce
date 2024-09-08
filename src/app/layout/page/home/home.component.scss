@@ -1,0 +1,20 @@
+@keyframes slideInRight {
+    from {
+        transform: translateX(0%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-right:hover {
+    animation: slideInRight .8s ease-out;
+}
+
+.product:hover .flashEffect{
+    animation: slideInRight .8s ease-out;
+}
+

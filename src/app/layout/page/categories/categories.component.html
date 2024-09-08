@@ -1,1 +1,13 @@
-<p>categories works!</p>
+<h1 class="text-5xl font-bold main-text-color text-center mt-4">All categories</h1>
+<br>
+<div class="flex justify-center flex-wrap mb-10">
+    @for (item of CategoriesData; track item._id) {
+
+    <div class="w-1/4 brand m-4">
+        <div>
+            <img class="aspect-square w-96 object-cover"   src="{{item.image}}" alt="{{item.name}}">
+        </div>
+        <h1 class="text-2xl font-bold main-text-color text-center my-4">{{item.name}}</h1>
+    </div>
+    }
+</div>

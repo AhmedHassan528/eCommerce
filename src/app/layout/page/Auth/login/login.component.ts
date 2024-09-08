@@ -3,12 +3,12 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModu
 import { AuthService } from '../../../../core/services/Auth-Service/auth.service';
 import { ErrorComponent } from "../../../additions/Errors/error/error.component";
 import { SucceedComponent } from "../../../additions/Errors/succeed/succeed.component";
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, ErrorComponent, SucceedComponent],
+  imports: [RouterLink, ReactiveFormsModule, ErrorComponent, SucceedComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
