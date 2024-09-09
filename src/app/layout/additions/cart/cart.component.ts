@@ -7,11 +7,12 @@ import { ICart } from '../../../core/Interfaces/icart';
 import { CurrencyPipe } from '@angular/common';
 import { TermtextPipe } from '../../../core/Pipes/termtext.pipe';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CurrencyPipe, FontAwesomeModule, TermtextPipe, RouterLink],
+  imports: [CurrencyPipe, TranslateModule,FontAwesomeModule, TermtextPipe, RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })

@@ -5,11 +5,11 @@
             <img src="./assets/images/issue.jpg" alt="">
         </div>
         <div class=" content-center">
-            <h1 class="font-black text-main text-4xl mb-11">You didn't Add the Address !!</h1>
+            <h1 class="font-black text-main text-4xl mb-11">{{"address.You didn't Add the Address !!" | translate}}</h1>
             <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
                 class="lg:text-3xl md:text-2xl text-lg block text-white btn-main focus:ring-4 focus:outline-none  font-medium rounded-lg px-5 py-2.5 text-center "
                 type="button">
-                Create New Address
+                {{"address.create new address" | translate}}
             </button>
     
         </div>
@@ -18,20 +18,20 @@
     @for (address of AllAddress; track address._id) {
         <section class="flex justify-between flex-wrap product my-5 lg:mx-40 md:mx-32 mx-4 p-6">
             <div>
-                <h1 class="text-lg font-bold" >Name: {{address.name}}</h1>
-                <h1>Phone: {{address.phone}}</h1>
-                <h3>city: {{address.city}}</h3>
-                <h3>Details: {{address.details}}</h3>
+                <h1 class="text-lg font-bold" >{{"address.name" | translate}}: {{address.name}}</h1>
+                <h1>{{"address.phone" | translate}}: {{address.phone}}</h1>
+                <h3>{{"address.city" | translate}}: {{address.city}}</h3>
+                <h3>{{"address.details" | translate}}: {{address.details}}</h3>
             </div>
     
             <div>
                 @if (getCartId) {
                     <div class="mb-5">
-                        <button (click)="Onlinecheckout(getCartId, address)" class="btn-main">Use this Address</button>
+                        <button (click)="Onlinecheckout(getCartId, address)" class="btn-main">{{"address.use this address" | translate}}</button>
                     </div>
                 }
                 <div class="">
-                    <button (click)="DeleteAddress(address._id)" ><fa-icon class="text-red-700" [icon]="faTrash" ></fa-icon> Delete!</button>
+                    <button (click)="DeleteAddress(address._id)" ><fa-icon class="text-red-700" [icon]="faTrash" ></fa-icon> {{"address.delete" | translate}}!</button>
                 </div>
             </div>
         </section>
@@ -50,7 +50,7 @@
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Create new Address
+                    {{"create new address" | translate}}
                 </h3>
                 <button type="button"
                     class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -60,42 +60,41 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
-                    <span class="sr-only">Close modal</span>
+                    <span class="sr-only">{{"address.Close modal" | translate}}</span>
                 </button>
             </div>
             <!-- Modal body -->
             <div class="p-4 md:p-5">
                 <form class="space-y-4"  [formGroup]="registerForm" (ngSubmit)="AddressSubmit()" >
                     <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                            Name</label>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            {{"address.your name" | translate}}
+                            </label>
                         <input type="text" name="name" id="name"
                             class=" text-sm rounded-lg block w-full p-2.5  text-gray-900 border border-gray-300 bg-gray-50 focus:ring-green-400 focus:border-green-700 "
                             required formControlName="name" />
                     </div>
                     <div>
-                        <label for="Details" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                            Details</label>
+                        <label for="Details" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            {{"address.your details" | translate}}</label>
                         <input type="text" name="Details" id="Details"
                             class=" text-sm rounded-lg  block w-full p-2.5 text-gray-900 border border-gray-300 bg-gray-50 focus:ring-green-400 focus:border-green-700 "
                             required formControlName="details" />
                     </div>
                     <div>
-                        <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                            Phone Number</label>
+                        <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{"address.phone numbers" | translate}}</label>
                         <input type="number" name="number" id="text"
                             class=" text-sm rounded-lg  block w-full p-2.5 text-gray-900 border border-gray-300 bg-gray-50 focus:ring-green-400 focus:border-green-700 "
                             required  formControlName="phone"/>
                     </div>
                     <div>
-                        <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-                            City</label>
+                        <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{"address.city" | translate}}</label>
                         <input type="text" name="city" id="city"
                             class=" text-sm rounded-lg  block w-full p-2.5 text-gray-900 border border-gray-300 bg-gray-50 focus:ring-green-400 focus:border-green-700 "
                             required formControlName="city" />
                     </div>
                     <button type="submit"
-                        class="w-full btn-main focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center ">submit</button>
+                        class="w-full btn-main focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center ">{{"address.add address" | translate}}</button>
                 </form>
             </div>
         </div>

@@ -19,12 +19,14 @@ import { SucceedComponent } from "../../additions/Errors/succeed/succeed.compone
 import { ErrorComponent } from "../../additions/Errors/error/error.component";
 import { WishListService } from '../../../core/services/WishListServices/wish-list.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { TranslateModule } from '@ngx-translate/core';
+import { CustomCurrencyPipe } from '../../../core/Pipes/custom-currency.pipe';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FontAwesomeModule, FormsModule, CarouselModule, RouterLink, CurrencyPipe, LowerCasePipe, TitleCasePipe, TermtextPipe, KMPSearchPipe, SucceedComponent, ErrorComponent,NgClass, NgStyle],
+  imports: [FontAwesomeModule,CustomCurrencyPipe,TranslateModule, FormsModule, CarouselModule, RouterLink, CurrencyPipe, LowerCasePipe, TitleCasePipe, TermtextPipe, KMPSearchPipe, SucceedComponent, ErrorComponent,NgClass, NgStyle],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss', '../../../app.component.scss']
 })
@@ -204,6 +206,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     pullDrag: false,
     dots: false,
     navSpeed: 700,
+    rtl: true,
+
+    autoplay: true,
+    autoplayTimeout: 5000,
     navText: ['', ''],
     responsive: {
       0: {
@@ -228,8 +234,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     touchDrag: true,
     pullDrag: false,
     dots: false,
+    rtl: true,
     navSpeed: 700,
     navText: ['', ''],
+    autoplay: true,
+    autoplayTimeout: 5000,
     responsive: {
       0: {
         items: 3

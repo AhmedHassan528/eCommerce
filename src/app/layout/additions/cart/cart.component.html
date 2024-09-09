@@ -1,77 +1,3 @@
-<!-- @if (cartItems) {
-
-    @if (!cartItems.products || cartItems.products.length === 0) {
-        <section class="flex justify-around flex-wrap p-6">
-            <div style="max-width: 550px;">
-                <img src="./assets/images/issue.jpg" alt="">
-            </div>
-            <div class=" content-center">
-                <h1 class="font-black text-main text-4xl mb-11">You didn't Add Anything To Cart !!</h1>
-                <button 
-                    class="lg:text-3xl md:text-2xl text-lg block text-white btn-main focus:ring-4 focus:outline-none  font-medium rounded-lg px-5 py-2.5 text-center "
-                    type="button" routerLink="/home">
-                    Shopping Now
-                </button>
-        
-            </div>
-        </section>
-    }@else {
-        <section class="bg-gray-200 p-8 my-4">
-            <div class="flex justify-between mb-12">
-                <div>
-                    <h1 class="mb-5 text-3xl">Shop Cart</h1>
-                    <h3 class="main-text-color">Total Cart Price: {{cartItems.totalCartPrice | currency : "EGP"}}</h3>
-                </div>
-                <div>
-                    <button type="button" class="btn-main mb-2">check out</button>
-                </div>
-            </div>
-            
-            @for (item of cartItems.products; track item._id) 
-            {
-                <div class="md:flex justify-between relative">
-                    <div class="flex">
-                        <img  class="max-h-40 max-w-52 product" src="{{item.product.imageCover}}">
-                        <div class="ml-4">
-                            <p>{{item.product.title | termtext : 3}}</p>
-                            <br>
-                            <p class="main-text-color" >price: {{item.price | currency : "EGP"}}</p>
-                            <br>
-                            <button (click)="DeletespecificItem(item.product._id)">
-                                <fa-icon style="color: #ff0000" [icon]="faTrash" ></fa-icon> Remove
-                            </button>
-                        </div>
-                    </div>
-            
-                    <div class="absolute right-0 bottom-5">
-                        <button [disabled]="isLoading == true" (click)="EditQuantity(item.product._id, item.count, false)" class="product p-1">
-                            <fa-icon [icon]="faMinus"></fa-icon>
-                        </button>
-    
-                        <span class="p-2">
-                            @if (isLoading == true) {
-                                <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon>
-                            }@else{
-                                {{item.count}}
-                            }
-                        </span>
-    
-                        <button [disabled]="isLoading == true" (click)="EditQuantity(item.product._id, item.count, true)" class="product p-1" >
-                            <fa-icon [icon]="faPlus"></fa-icon>
-                        </button>
-    
-                    </div>
-                </div>
-                <div class="my-5">
-                    <div style="background-color: #0AAD0A;" class="min-h-px"  ></div>
-                </div>
-            }
-            <button (click)="ClearItems()" class=" w-full flex justify-center">
-                <p class=" text-red-700 lg:text-xl md:text-lg text-base" >Click to remove all cart</p>
-            </button>
-        </section>
-    }
-} -->
 
 @if (cartItems) {
 
@@ -81,11 +7,13 @@
                 <img src="./assets/images/issue.jpg" alt="">
             </div>
             <div class=" content-center">
-                <h1 class="font-black text-main text-4xl mb-11">You didn't Add Anything To Cart !!</h1>
+                <h1 class="font-black text-main text-4xl mb-11">
+                    {{"cart.You didn't Add Anything To Cart !!" | translate}}
+                </h1>
                 <button 
                     class="lg:text-3xl md:text-2xl text-lg block text-white btn-main focus:ring-4 focus:outline-none  font-medium rounded-lg px-5 py-2.5 text-center "
                     type="button" routerLink="/home">
-                    Shopping Now
+                    {{"cart.Shopping Now" | translate}}
                 </button>
         
             </div>
@@ -94,7 +22,8 @@
     <section class="py-24 relative">
         <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
             
-                <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">Shopping Cart
+                <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">
+                    {{"cart.shopping cart" | translate}}
                 </h2>
     
                 @for (item of cartItems.products; track item._id) {
@@ -162,16 +91,20 @@
 
 
                 <div class="flex flex-col md:flex-row items-center md:items-center justify-between lg:px-6 pb-6 border-b border-gray-200 max-lg:max-w-lg max-lg:mx-auto">
-                    <h5 class="text-gray-900 font-manrope font-semibold text-2xl leading-9 w-full max-md:text-center max-md:mb-4">Subtotal</h5>
+                    <h5 class="text-gray-900 font-manrope font-semibold text-2xl leading-9 w-full max-md:text-center max-md:mb-4">{{"cart.subtotal" | translate}}</h5>
     
                     <div class="flex items-center justify-between gap-5 ">
                         <h6 class="font-manrope font-bold text-3xl lead-10 main-text-color">{{cartItems.totalCartPrice| currency : "EGP"}}</h6>
                     </div>
                 </div>
                 <div class="max-lg:max-w-lg max-lg:mx-auto">
-                    <p class="font-normal text-base leading-7 text-gray-500 text-center mb-5 mt-6">Shipping taxes, 14% Egypt tax</p>
+                    <p class="font-normal text-base leading-7 text-gray-500 text-center mb-5 mt-6">
+                        {{"cart.shipping taxes, 14% egypt tax" | translate}}
+                    </p>
                     <button  [routerLink]="['/address', cartItems._id]"
-                        class="rounded-full py-4 px-6 btn-main text-white font-semibold text-lg w-full text-center transition-all duration-500 ">Checkout</button>
+                        class="rounded-full py-4 px-6 btn-main text-white font-semibold text-lg w-full text-center transition-all duration-500 ">
+                        {{"cart.checkout" | translate}}
+                    </button>
                 </div>
                 
             
@@ -179,8 +112,6 @@
     </section>
 }
 }
-@for (item of cartItems.products; track item._id) {}
 
 
 
-                        

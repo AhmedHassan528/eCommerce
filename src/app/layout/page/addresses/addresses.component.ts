@@ -7,11 +7,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from '../../../core/services/OrdersServices/orders.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-addresses',
   standalone: true,
-  imports: [ReactiveFormsModule, FontAwesomeModule],
+  imports: [ReactiveFormsModule, TranslateModule ,FontAwesomeModule],
   templateUrl: './addresses.component.html',
   styleUrl: './addresses.component.scss'
 })

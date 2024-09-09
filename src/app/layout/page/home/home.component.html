@@ -82,7 +82,7 @@
     
                 <div [routerLink]="['/Details', item._id]" class=" 2xl:flex md:mt-3 md:justify-between md:content-center content-center ">
                     <span>
-                        {{item.price | currency: 'EGP'}}
+                        {{item.price | customCurrency: "EGP"}}
                     </span>
                     <div class="2xl:mt-0 2xl:block md:mt-4 md:flex md:justify-end md:min-w-0 min-w-32 mt-11">
                             @for (item of [1,2,3,4,5].slice(0, item.ratingsAverage); track $index) {
@@ -100,9 +100,9 @@
                 <button [disabled]="AddLoading == true " (click)="addToCart(item._id)" type="button" class=" btn-main slide-in-right">
                     @if (AddLoading == true && itemId == item._id) {
                         <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon>
-                        Add To Card
+                        {{"product.add to cart" | translate }}
                     }@else {
-                        Add To Card
+                        {{"product.add to cart" | translate }}
                     }
                 </button>
             </div>

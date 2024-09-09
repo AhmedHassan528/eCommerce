@@ -1,0 +1,44 @@
+{
+    "navBar" : {
+        "home" : "Home",
+        "cart" : "Cart",
+        "address" : "Address",
+        "products" : "Products",
+        "categories" : "Categories",
+        "brands" : "Brands",
+        "wishlist" : "Wishlist",
+        "signout" : "Sign Out",
+        "login" : "Login",
+        "register" : "Register",
+        "lang" : "EN"
+    },
+    "product" : {
+        "add to cart" : "Add to Cart",
+        "egp" : "EGP"
+    },
+    "cart" : {
+        "shopping cart" : "Shopping Cart",
+        "subtotal" : "Subtotal",
+        "ehipping taxes, 14% egypt tax" : "Shipping taxes, 14% Egypt tax",
+        "continue shopping" : "Continue Shopping",
+        "You didn't Add Anything To Cart !!" : "You didn't Add Anything To Cart !!",
+        "checkout" : "Checkout",
+        "Shopping Now": "Shopping Now"
+    },
+    "address":{
+        "You didn't Add the Address !!" : "You didn't Add the Address !!",
+        "create new address" : "Create New Address",
+        "your name" : "Your Name",
+        "your details" : "Your Details",
+        "your phone number" : "Your Phone Number",
+        "your city" : "Your City",
+        "name": "Name",
+        "phone" : "Phone",
+        "city" : "City",
+        "details" : "Details",
+        "delete" : "Delete",
+        "add address" : "Add Address",
+        "use this address" : "Use This Address",
+        "Close modal" : "Close Modal"
+    }
+}

@@ -1,0 +1,44 @@
+{
+    "navBar": {
+        "home": "الرئيسية",
+        "cart": "سلة التسوق",
+        "address": "العنوان",
+        "products": "المنتجات",
+        "categories": "الفئات",
+        "brands": "العلامات التجارية",
+        "wishlist": "قائمة الرغبات",
+        "signout": "تسجيل الخروج",
+        "login": "تسجيل الدخول",
+        "register": "التسجيل",
+        "lang": "غ"
+    },
+    "product": {
+        "add to cart": "أضف إلى السلة",
+        "egp": "جنيه"
+    },
+    "cart": {
+        "shopping cart": "سلة التسوق",
+        "subtotal": "الإجمالي الفرعي",
+        "shipping taxes, 14% egypt tax": "ضرائب الشحن، 14% ضريبة القيمه المضافة",
+        "continue shopping": "متابعة التسوق",
+        "You didn't Add Anything To Cart !!": "لم تقم بإضافة أي شيء إلى السلة !!",
+        "checkout": "إتمام الشراء",
+        "Shopping Now": "تسوق الآن"
+    },
+    "address": {
+        "You didn't Add the Address !!" : "لم تقم بإضافة العنوان !!",
+        "create new address" : "إنشاء عنوان جديد",
+        "your name" : "اسمك",
+        "your details" : "تفاصيلك",
+        "your phone number" : "رقم هاتفك",
+        "your city" : "مدينتك",
+        "name": "الاسم",
+        "phone" : "الهاتف",
+        "city" : "المدينة",
+        "details" : "التفاصيل",
+        "delete" : "حذف",
+        "add address" : "إضافة العنوان",
+        "use this address" : "استخدام هذا العنوان",
+        "Close modal" : "إغلاق النافذة"
+    }
+}
