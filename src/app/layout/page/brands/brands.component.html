@@ -1,4 +1,4 @@
-<h1 class="text-5xl font-bold main-text-color text-center mt-4">All Brands</h1>
+<h1 class="text-5xl font-bold main-text-color text-center mt-4">{{"general.all brands" | translate }}</h1>
 <div #demo class="flex justify-center flex-wrap mb-10">
     @for (brand of AllBrands; track brand._id) {
 
@@ -13,7 +13,7 @@
 
 
 
-<h1 #product class=" text-5xl font-bold main-text-color text-center mb-2 mt-5">Products Brand</h1>
+<h1 #product class=" text-5xl font-bold main-text-color text-center mb-2 mt-5">{{"general.products of Brands"| translate}}</h1>
 
 
 <!--Products by Brnad-->
@@ -61,5 +61,5 @@
     }
 </section>
 }@else {
-<h1 class="text-3xl font-bold main-text-color text-center mt-5">No Products Found</h1>
+<h1 class="text-3xl font-bold main-text-color text-center mt-5">{{"general.no products found" | translate}}</h1>
 }

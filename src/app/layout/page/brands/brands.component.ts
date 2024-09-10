@@ -10,11 +10,12 @@ import { CurrencyPipe, LowerCasePipe, TitleCasePipe } from '@angular/common';
 import { TermtextPipe } from '../../../core/Pipes/termtext.pipe';
 import { KMPSearchPipe } from '../../../core/Pipes/kmpsearch.pipe';
 import { CartService } from '../../../core/services/CartServices/cart.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-brands',
   standalone: true,
-  imports: [FontAwesomeModule, KMPSearchPipe, RouterLink, CurrencyPipe, LowerCasePipe, TitleCasePipe, TermtextPipe],
+  imports: [FontAwesomeModule, KMPSearchPipe, RouterLink, CurrencyPipe, LowerCasePipe, TitleCasePipe, TermtextPipe, TranslateModule],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.scss'
 })

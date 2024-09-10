@@ -7,11 +7,12 @@ import { Subscription } from 'rxjs';
 import { ItemService } from '../../../core/services/Items-Service/item.service';
 import { IProductDetails } from '../../../core/Interfaces/iproduct-details';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [FontAwesomeModule, CarouselModule,RouterLink],
+  imports: [FontAwesomeModule, TranslateModule ,CarouselModule,RouterLink],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
 })
@@ -35,7 +36,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getAtivatedSub = this._activatedRoute.paramMap.subscribe({
       next: (params) => {
-        console.log(params.get('id'));
         this.getProductDetails(params.get('id')!);
       }
     });
@@ -67,6 +67,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     dots: false,
     navSpeed: 700,
     navText: ['', ''],
+    autoplay: true,
+    autoplayTimeout: 2000,
     responsive: {
       0: {
         items: 1

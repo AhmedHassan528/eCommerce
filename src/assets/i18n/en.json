@@ -14,7 +14,8 @@
     },
     "product" : {
         "add to cart" : "Add to Cart",
-        "egp" : "EGP"
+        "egp" : "EGP",
+        "no products found" : "No Products Found"
     },
     "cart" : {
         "shopping cart" : "Shopping Cart",
@@ -40,5 +41,23 @@
         "add address" : "Add Address",
         "use this address" : "Use This Address",
         "Close modal" : "Close Modal"
+    },
+    "wishlist" : {
+        "wishlist" : "Wishlist",
+        "You didn't Add Anything To Wishlist !!" : "You didn't Add Anything To Wishlist !!",
+        "View details" : "View Details",
+        "remove item" : "Remove Item",
+        "your product" : "YOUR PRODUCTS",
+        "title" : "TITLE",
+        "price" : "PRICE",
+        "more options" : "MORE OPTIONS",
+        "items": "Items"
+    },
+    "general" : {
+        "search products" : "Search Products",
+        "all categories" : "All Categories",
+        "all brands" : "All Brands",
+        "products of Brands" : "products of Brands",
+        "no products found" : "No Products Found"
     }
 }

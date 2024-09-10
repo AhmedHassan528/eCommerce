@@ -3,11 +3,12 @@ import { WishListService } from '../../../core/services/WishListServices/wish-li
 import { IWishList } from '../../../core/Interfaces/iwish-list';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-wish-list',
   standalone: true,
-  imports: [CurrencyPipe, RouterLink],
+  imports: [CurrencyPipe, RouterLink, TranslateModule],
   templateUrl: './wish-list.component.html',
   styleUrl: './wish-list.component.scss'
 })

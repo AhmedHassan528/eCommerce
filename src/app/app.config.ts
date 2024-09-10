@@ -24,7 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withInMemoryScrolling({scrollPositionRestoration:"top"})), provideClientHydration(),
-    provideHttpClient(withFetch(), withInterceptors([loadingInterceptor,headerInterceptor]))
+    provideHttpClient(withFetch(), withInterceptors([loadingInterceptor,headerInterceptor, errorsInterceptor]))
     , importProvidersFrom(
       TranslateModule.forRoot({
         defaultLanguage: 'en',

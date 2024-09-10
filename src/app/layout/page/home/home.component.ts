@@ -3,7 +3,6 @@ import { ItemService } from './../../../core/services/Items-Service/item.service
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar, faStarHalf, faSpinner, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import { Subscription } from 'rxjs';
 import { CategoryService } from '../../../core/services/Categories/category.service';
 import { ICategories } from '../../../core/Interfaces/icategories';
@@ -64,20 +63,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // component Lifecycle Hooks
   ngOnInit(): void {
-    this.spinner.show();
-
-
-
     this.getProducts();
     this.getCategories();
     this.getWishList();
-
-    setTimeout(() => {
-      /** spinner ends after 5 seconds */
-      this.spinner.hide();
-    }, 2000);
-
-
 
   }
   ngOnDestroy(): void {
@@ -94,10 +82,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getItemSub = this._Items.getItems().subscribe({
       next: (res) => {
         this.Products = res.data;
-        console.log(this.Products);
-      },
-      error: (err) => {
-        console.log(err);
       }
     });
   }
@@ -108,9 +92,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
       next: (res) => {
         this.Categories = res.data;
-      },
-      error: (err) => {
-        console.log(err);
       }
     })
   }
@@ -120,11 +101,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getWishListSub = this._wishListService.getWishList().subscribe({
       next: (res) => {
         this.WishListIDs = res.data.map((item: { _id: any; }) => item._id);;
-
-        console.log(this.WishListIDs);
-      },
-      error: (err) => {
-        console.log(err);
       }
     });
   }
@@ -136,13 +112,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this._wishListService.addToWishList(id).subscribe({
       next: (res) => {
-        console.log(res.data);
         this.WishListIDs = res.data
-
-        this.spinner.hide();
-      },
-      error: (err) => {
-        console.log(err);
         this.spinner.hide();
       }
     });
@@ -155,13 +125,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this._wishListService.removeFromWishList(id).subscribe({
       next: (res) => {
-        console.log(res.data);
         this.WishListIDs = res.data
-
-        this.spinner.hide();
-      },
-      error: (err) => {
-        console.log(err);
 
         this.spinner.hide();
       }
@@ -176,14 +140,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.getCartSub = this._cartService.addCartItem(id).subscribe({
       next: (res) => {
-        console.log(res);
         this.succeed = true;
         this.ServMessage = res.message;
-        this.AddEffect();
-      },
-      error: (err) => {
-        console.log(err);
-        this.succeed = false;
         this.AddEffect();
       }
     });

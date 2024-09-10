@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ICategories } from '../../../core/Interfaces/icategories';
 import { CategoryService } from '../../../core/services/Categories/category.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
 })
@@ -35,7 +36,6 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     this.GetAllCategoriesSub = this._categoryService.getCategories().subscribe({
       next: (res) => {
         this.CategoriesData = res.data;
-        console.log(this.CategoriesData);
       },
       error: (err) => {
         console.log(err);

@@ -16,11 +16,12 @@ import { FormsModule } from '@angular/forms';
 import { CartService } from '../../../core/services/CartServices/cart.service';
 import { SucceedComponent } from "../../additions/Errors/succeed/succeed.component";
 import { ErrorComponent } from "../../additions/Errors/error/error.component";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [FontAwesomeModule, FormsModule, RouterLink, CurrencyPipe, LowerCasePipe, TitleCasePipe, TermtextPipe, KMPSearchPipe, SucceedComponent, ErrorComponent],
+  imports: [FontAwesomeModule, TranslateModule ,FormsModule, RouterLink, CurrencyPipe, LowerCasePipe, TitleCasePipe, TermtextPipe, KMPSearchPipe, SucceedComponent, ErrorComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -57,7 +58,6 @@ export class ProductsComponent {
   ngOnInit(): void {
     this.getProducts();
     this.getCategories();
-    console.log(this.Categories);
   }
   ngOnDestroy(): void {
     this.getItemSub?.unsubscribe();
@@ -99,7 +99,6 @@ export class ProductsComponent {
     this.getCartSub = this._cartService.addCartItem(id).subscribe({
       next: (res) => {
         console.log(res);
-        this.succeed = true;
         this.ServMessage = res.message;
         this.AddEffect();
       },
@@ -111,10 +110,7 @@ export class ProductsComponent {
     });
   }
 
-  // Add to Cart Effect Loading
-  // setTimeout(() => {
-  //   this._router.navigate(['/']);
-  // }, 1000);
+
   AddEffect(): void {
     setTimeout(() => {
       this.succeed = null;

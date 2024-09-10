@@ -15,8 +15,6 @@ export class CustomCurrencyPipe implements PipeTransform {
 
       let lang = localStorage.getItem("lang")!;
 
-      console.log("yes!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
       if (lang === "ar"){
         
         return displaySymbol ? `${value} جنيه مصري` : `${value}`;

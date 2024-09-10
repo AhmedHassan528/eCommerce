@@ -26,19 +26,37 @@
         "Shopping Now": "تسوق الآن"
     },
     "address": {
-        "You didn't Add the Address !!" : "لم تقم بإضافة العنوان !!",
-        "create new address" : "إنشاء عنوان جديد",
-        "your name" : "اسمك",
-        "your details" : "تفاصيلك",
-        "your phone number" : "رقم هاتفك",
-        "your city" : "مدينتك",
+        "You didn't Add the Address !!": "لم تقم بإضافة العنوان !!",
+        "create new address": "إنشاء عنوان جديد",
+        "your name": "اسمك",
+        "your details": "تفاصيلك",
+        "your phone number": "رقم هاتفك",
+        "your city": "مدينتك",
         "name": "الاسم",
-        "phone" : "الهاتف",
-        "city" : "المدينة",
-        "details" : "التفاصيل",
-        "delete" : "حذف",
-        "add address" : "إضافة العنوان",
-        "use this address" : "استخدام هذا العنوان",
-        "Close modal" : "إغلاق النافذة"
+        "phone": "الهاتف",
+        "city": "المدينة",
+        "details": "التفاصيل",
+        "delete": "حذف",
+        "add address": "إضافة العنوان",
+        "use this address": "استخدام هذا العنوان",
+        "Close modal": "إغلاق النافذة"
+    },
+    "wishlist": {
+        "wishlist": "قائمة الرغبات",
+        "You didn't Add Anything To Wishlist !!": "لم تقم بإضافة أي شيء إلى قائمة الرغبات !!",
+        "View details": "تفاصيل اكتر عن منتجنا",
+        "remove item": "إزالة العنصر",
+        "your product": "منتجاتك",
+        "title": "العنوان",
+        "price": "السعر",
+        "more options": "تفاصيل اكتر",
+        "items": "العناصر"
+    },
+    "general": {
+        "search products": "البحث عن المنتجات",
+        "all categories": "جميع الفئات",
+        "all brands": "جميع العلامات التجارية",
+        "products of Brands": "منتجات العلامات التجارية",
+        "no products found": "لم يتم العثور على منتجات"
     }
 }
