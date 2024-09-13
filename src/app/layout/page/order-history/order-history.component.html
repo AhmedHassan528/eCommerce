@@ -1,0 +1,104 @@
+<section class="py-24 relative">
+    <div class="w-full max-w-7xl mx-auto px-4 md:px-8">
+        <h2 class="font-manrope font-extrabold text-3xl lead-10 text-black mb-9">{{"AllOrder.Order History" | translate}}</h2>
+
+        <div class="flex sm:flex-col lg:flex-row sm:items-center justify-between">
+            <ul class="flex max-sm:flex-col sm:items-center gap-x-14 gap-y-3">
+                <li class="font-medium text-lg leading-8 cursor-pointer main-text-color transition-all duration-500 ">
+                    {{"AllOrder.All Order" | translate}}</li>
+            </ul>
+        </div>
+        @for (item of orders; track item._id) {
+
+        <div class="mt-7 border border-gray-300 pt-9">
+            <div class="flex max-md:flex-col items-center justify-between px-3 md:px-11">
+                <div class="data">
+                    <p class="font-medium text-lg leading-8 text-black whitespace-nowrap">{{"AllOrder.Order" | translate}} : #{{item.id}}</p>
+                    <p class="font-medium text-lg leading-8 text-black mt-3 whitespace-nowrap">{{"AllOrder.Order Payment" | translate}} :
+                        {{item.paymentMethodType}}
+                    </p>
+                </div>
+                <div>
+                    <p class=" text-2xl leading-8 pt-3 main-text-color whitespace-nowrap">
+                        @if (item.isDelivered) {
+                        {{"AllOrder.Delivered" | translate}}
+                        }@else {
+                        {{"AllOrder.Not Delivered" | translate}}
+                        }
+                    </p>
+                </div>
+            </div>
+            <svg class="my-9 w-full" xmlns="http://www.w3.org/2000/svg" width="1216" height="2" viewBox="0 0 1216 2"
+                fill="none">
+                <path d="M0 1H1216" stroke="#D1D5DB" />
+            </svg>
+
+            @for (product of item.cartItems; track product.product._id) {
+            <div class="flex max-lg:flex-col items-center gap-8 lg:gap-24 px-3 md:px-11">
+                <div class="grid grid-cols-4 w-full">
+                    <div class="col-span-4 sm:col-span-1">
+                        <img src="{{product.product.imageCover}}" alt="{{product.product.title}}"
+                            class="max-sm:mx-auto object-cover">
+                    </div>
+                    <div
+                        class="col-span-4 sm:col-span-3 max-sm:mt-4 sm:pl-8 flex flex-col justify-center max-sm:items-center">
+                        <h6 class="font-manrope font-semibold text-xl leading-9 text-black mb-3">
+                            {{product.product.title| termtext: 4}}
+                        </h6>
+                        <p class="font-normal text-lg leading-8 text-gray-500 mb-8 whitespace-nowrap">By:
+                            {{product.product.brand.name}}
+                        </p>
+                        <div class="flex items-center max-sm:flex-col gap-x-10 gap-y-3">
+                            <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">{{"AllOrder.Qty" | translate}}:
+                                {{product.count}}
+                            </span>
+                            <p class="font-semibold text-xl leading-8 text-black whitespace-nowrap">{{"AllOrder.Price" | translate}}
+                                {{product.price | currency:"EGP"}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-around w-full  sm:pl-28 lg:pl-0">
+                    <div class="flex flex-col justify-center items-start max-sm:items-center">
+                        <p class="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
+                            {{"AllOrder.Delivery Expected by"|translate}}</p>
+                        <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap mb-4">
+                            {{item.createdAt | date}}</p>
+
+                        <p class="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
+                            {{"AllOrder.Shipping To"|translate}}:</p>
+                        <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap">
+
+                            {{item.shippingAddress?.city}}, {{item.shippingAddress?.details}},
+                            {{item.shippingAddress?.phone}},
+
+                        </p>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <svg class="my-9 w-full" xmlns="http://www.w3.org/2000/svg" width="1216" height="2" viewBox="0 0 1216 2"
+                fill="none">
+                <path d="M0 1H1216" stroke="#D1D5DB" />
+            </svg>
+            }
+
+
+            <div class="px-3 md:px-11 flex items-center justify-between max-sm:flex-col-reverse">
+                <div class="flex max-sm:flex-col-reverse items-center py-3">
+                    <p class="font-normal text-xl leading-8 main-text-color sm:pl-8">
+                        @if (item.isPaid) {
+                        {{"AllOrder.Payment Is Succesfull Paid" | translate}}
+                        }@else {
+                        <span class="text-red-600">{{"AllOrder.Payment Is Not Paid" | translate}} </span>
+                        }
+                    </p>
+                </div>
+                <p class="font-medium text-xl leading-8 text-black max-sm:py-4"> <span class="text-gray-500">
+                    {{"AllOrder.Total Price" | translate}}: </span> {{item.totalOrderPrice | currency: "EGP"}}</p>
+            </div>
+        </div>
+    }
+    </div>
+</section>

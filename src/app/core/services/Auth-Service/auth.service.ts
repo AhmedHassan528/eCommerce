@@ -31,14 +31,20 @@ export class AuthService {
       return this._httpClient.post(`${RouteUrl}/api/v1/auth/forgotPasswords`, user)
     }
   }
-  ResetCode (user: object): Observable<any> {
-    {
-      return this._httpClient.post(`${RouteUrl}/api/v1/auth/verifyResetCode`, user)
-    }
+
+  ResetCode(user: string): Observable<any> {
+    return this._httpClient.post(`${RouteUrl}/api/v1/auth/verifyResetCode`, 
+      {
+        "resetCode": user 
+      }
+    );
   }
+
+
   ResetPassword (user: object): Observable<any> {
+
     {
-      return this._httpClient.post(`${RouteUrl}/api/v1/auth/verifyResetCode`, user)
+      return this._httpClient.put(`${RouteUrl}/api/v1/auth/resetPassword`, user)
     }
   }
 

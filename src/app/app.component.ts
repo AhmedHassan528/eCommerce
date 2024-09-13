@@ -4,7 +4,6 @@ import { initFlowbite } from 'flowbite';
 import { FlowbiteService } from './core/services/FlowBite/flowbite-service.service';
 import { NavBarComponent } from "./layout/additions/nav-bar/nav-bar.component";
 import { FooterComponent } from "./layout/additions/footer/footer.component";
-import RouteUrl from './BaseUrl';
 import { NgxSpinnerComponent } from 'ngx-spinner';
 
 @Component({

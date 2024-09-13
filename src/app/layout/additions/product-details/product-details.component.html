@@ -14,8 +14,29 @@
         </div>
 
         <div class="md:p-0 md:col-span-7 col-span-12 p-10 content-center">
-            <h1 class="mb-4 text-main text-2xl">{{getDetails.title}}</h1>
-            <h3 class="mb-5 text-gray-500">{{getDetails.description}}</h3>
+            <div class="flex justify-between ">
+                <div>
+                    <h1 class="mb-4 text-main text-2xl">{{getDetails.title}}</h1>
+                    <h3 class="mb-5 text-gray-500">{{getDetails.description}}</h3>
+                </div>
+                <div>
+                    @if (wishListLoading !== true) {
+                        @if (wishList === true) {
+                            <button (click)="removeFromWishList()">
+                                <fa-icon style="color: red;" [icon]="faHeart" class="text-3xl"></fa-icon>
+                            </button>
+    
+                        }@else {
+                            <button (click)="addToWishList()">
+                                <fa-icon [icon]="faHeart" class="text-3xl"></fa-icon>
+                            </button>
+                        }
+                    }@else {
+                        <fa-icon [icon]="faSpinner" class="text-3xl" [spin]="true"></fa-icon>
+                    }
+                </div>
+            </div>
+
             <button [routerLink]="['/brands']" class="mb-2 font-semibold">{{Brand}}</button>
             <div class="flex justify-between">
                 <p  class="text-lg">{{getDetails.price}}EGY</p>
@@ -30,7 +51,12 @@
                     {{getDetails.ratingsAverage}}
                 </div>
             </div>
-            <button class="btn-main w-full" type="button">{{"product.add to cart" | translate}}</button>
+            <button [disabled]="AddingToCart" class="btn-main w-full" type="button" (click)="addToCart()">
+                @if (AddingToCart) {
+                    <fa-icon [icon]="faSpinner" class="text-2xl" [spin]="true"></fa-icon>
+                }
+                {{"product.add to cart" | translate}}
+            </button>
         </div>
     </div>
 </section>

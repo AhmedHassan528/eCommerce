@@ -4,11 +4,12 @@ import { AuthService } from '../../../../core/services/Auth-Service/auth.service
 import { ErrorComponent } from "../../../additions/Errors/error/error.component";
 import { SucceedComponent } from "../../../additions/Errors/succeed/succeed.component";
 import { Router, RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, ErrorComponent, SucceedComponent],
+  imports: [RouterLink, ReactiveFormsModule, ErrorComponent, SucceedComponent, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

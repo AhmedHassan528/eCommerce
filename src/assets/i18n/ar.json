@@ -10,13 +10,18 @@
         "signout": "تسجيل الخروج",
         "login": "تسجيل الدخول",
         "register": "التسجيل",
-        "lang": "غ"
+        "lang": "غ",
+        "langName" : "أختر لغه",
+        "orderHistory" : "الطلبات السابقة"
+
+
     },
     "product": {
         "add to cart": "أضف إلى السلة",
         "egp": "جنيه"
     },
     "cart": {
+        "Do You want to clear all cart !!!" : "هل تريد مسح كل العربة !!!",
         "shopping cart": "سلة التسوق",
         "subtotal": "الإجمالي الفرعي",
         "shipping taxes, 14% egypt tax": "ضرائب الشحن، 14% ضريبة القيمه المضافة",
@@ -58,5 +63,53 @@
         "all brands": "جميع العلامات التجارية",
         "products of Brands": "منتجات العلامات التجارية",
         "no products found": "لم يتم العثور على منتجات"
-    }
+    },
+    "Auth": {
+        "register now": "سجل الآن",
+        "name": "الاسم",
+        "Name is Required": "الاسم مطلوب",
+        "The Name must have a maximum of 20 character": "يجب ألا يزيد الاسم عن 20 حرفًا",
+        "The Name must have a minmum of 3 character": "يجب أن يكون الاسم مكونًا من 3 أحرف على الأقل",
+        "Email is Required": "البريد الإلكتروني مطلوب",
+        "The email must have email signature": "يجب ان يكون البريد الإلكتروني صالح",
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور",
+        "password is Required": "كلمة المرور مطلوبة",
+        "The password is InValid": "كلمة المرور غير صالحة",
+        "repassword": "إعادة كلمة المرور",
+        "rePassword Not match with password": "إعادة كلمة المرور لا تتطابق مع كلمة المرور",
+        "phone": "الهاتف",
+        "phone is Required": "رقم الهاتف مطلوب",
+        "register": "تسجيل",
+        "login now": "تسجيل الدخول الآن",
+        "login": "تسجيل الدخول",
+        "forgot your password!": "نسيت كلمة المرور!",
+        "Reset Password": "إعادة تعيين كلمة المرور",
+        "Send Reset Code": "إرسال رمز إعادة التعيين",
+        "Reset Code": "رمز إعادة التعيين",
+        "Enter your Reset Code": "أدخل رمز إعادة التعيين",
+        "confirme": "تأكيد"
+    },
+    "Footer": {
+        "Get The FreshCart App": "احصل على تطبيق FreshCart",
+        "We Will Send You a Link, Open it on Your Phone to download the app": "سنرسل لك رابطًا، افتحه على هاتفك لتنزيل التطبيق",
+        "Share App Link": "مشاركة رابط التطبيق",
+        "Payment partners": "شركاء الدفع",
+        "Get Deliveries with FreshCart": "احصل على التوصيلات مع FreshCart"
+    },
+    "AllOrder": {
+            "Order History": "تاريخ الطلبات",
+            "All Order": "جميع الطلبات",
+            "Order": "الطلب",
+            "Order Payment": "دفع الطلب",
+            "Qty": "الكمية",
+            "Price": "السعر",
+            "Delivery Expected by": "موعد التسليم المتوقع",
+            "Shipping To": "الشحن إلى",
+            "Payment Is Succesfull Paid": "تم الدفع بنجاح",
+            "Payment Is Not Paid": "لم يتم الدفع",
+            "Total Price": "السعر الإجمالي",
+            "Delivered" : "تم التوصيل",
+            "Not Delivered" : "لم يتم التوصيل"
+        }
 }

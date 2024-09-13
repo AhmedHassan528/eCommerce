@@ -12,6 +12,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { ProductDetailsComponent } from './layout/additions/product-details/product-details.component';
 import { AddressesComponent } from './layout/page/addresses/addresses.component';
 import { WishListComponent } from './layout/page/wish-list/wish-list.component';
+import { OrderHistoryComponent } from './layout/page/order-history/order-history.component';
 
 export const routes: Routes = [
 
@@ -26,6 +27,9 @@ export const routes: Routes = [
     {path: "products", component: ProductsComponent , canActivate: [authGuard]},
     {path: "categories", component: CategoriesComponent , canActivate: [authGuard]},
     {path: "brands", component: BrandsComponent , canActivate: [authGuard]},
+    {path: "orderHistory", component: OrderHistoryComponent , canActivate: [authGuard]},
+
+
     {path: "address", component: AddressesComponent , canActivate: [authGuard]},
     {path: "address/:id", component: AddressesComponent , canActivate: [authGuard]},
 

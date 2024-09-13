@@ -12,15 +12,15 @@
         <table class="w-full mt-16 whitespace-nowrap">
             <thead aria-label="table heading" class="w-full h-16 text-left py-6 bg-gray-50 border-gray-200 border-b">
                 <tr>
-                    <th class="text-base font-medium leading-4 text-gray-600 2xl:pl-20 pl-4 lg:pl-10">{{"wishlist.your product" | translate}}</th>
-                    <th class="text-base font-medium leading-4 text-gray-600 pl-6 lg:pl-20 2xl:pl-52">
+                    <th class="text-center text-base font-medium leading-4 text-gray-600 pl-6 lg:pl-20 2xl:pl-52">{{"wishlist.your product" | translate}}</th>
+                    <th class=" text-center text-base font-medium leading-4 text-gray-600 pl-6 lg:pl-20 2xl:pl-52">
                         {{"wishlist.title" | translate}}
                     </th>
-                    <th class="text-base font-medium leading-4 text-gray-600 pl-6 lg:pl-20 2xl:pl-52">
+                    <th class="text-center text-base font-medium leading-4 text-gray-600 pl-6 lg:pl-20 2xl:pl-52">
                         {{"wishlist.price" | translate}}
 
                     </th>
-                    <th class="text-base font-medium leading-4 main-text-color pl-6 lg:pl-20 2xl:pl-52">
+                    <th class="text-center text-base font-medium leading-4 main-text-color pl-6 lg:pl-20 2xl:pl-52">
                         {{"wishlist.more options" | translate}}
                     </th>
                     <th class="text-base font-medium leading-4 text-gray-600 2xl:pl-28 2xl:pr-20 pr-4 lg:pr-10"></th>
@@ -31,7 +31,8 @@
 
                 @for (item of GetWishListData; track item._id) {
                     <tr class="border-green-500 border-b">
-                        <th><img class="my-10 pl-4 lg:pl-10 2xl:pl-20"
+                        <th class="flex justify-center"
+                        ><img class="w-4/12"
                                 src="{{item.imageCover}}" alt="shoe" /></th>
                         <th class="mt-10 text-base font-medium leading-4 text-gray-600 pl-6 lg:pl-20 2xl:pl-52">
                             <p class="text-base leading-4 text-gray-800">{{item.title}}</p>
@@ -79,8 +80,8 @@
             @for (item of GetWishListData; track item._id) {
                 <div class="border-green-500 border-b pb-10">
                 <div class="px-4 flex flex-col jusitfy-center items-start mt-10">
-                    <div>
-                        <img src="{{item.imageCover}}" alt="{{item.title}}" />
+                    <div class="flex justify-center">
+                        <img class="w-2/4" src="{{item.imageCover}}" alt="{{item.title}}" />
                     </div>
                 </div>
                 <div class="px-4 mt-6  justify-between w-full flex jusitfy-center items-center">
@@ -94,7 +95,7 @@
                 <div class="px-4 mt-6  justify-between w-full flex jusitfy-center items-center">
                     <div>
                         <button [routerLink]="['/Details', item._id]"
-                            class="hover:underline text-base font-medium leading-none focus:outline-none focus:underline text-gray-800">
+                            class=" main-text-color :underline text-base font-medium leading-none focus:outline-none focus:underline text-gray-800">
                             {{"wishlist.View details" | translate}}
                         </button>
                     </div>

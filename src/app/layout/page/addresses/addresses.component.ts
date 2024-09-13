@@ -1,5 +1,5 @@
 import { dirname } from 'node:path';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AddressService } from '../../../core/services/AddressServices/address.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IAddress } from '../../../core/Interfaces/iaddress';
@@ -8,6 +8,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from '../../../core/services/OrdersServices/orders.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-addresses',
@@ -22,7 +23,9 @@ export class AddressesComponent implements OnInit {
 
   // varibles
   getCartId!: string | null;
+  addingAddress = false;
 
+  private readonly _toastrService = inject(ToastrService);
 
   // constructor
   constructor(private _addressService:AddressService,private _ordersService:OrdersService, private _activatedRoute: ActivatedRoute) { }
@@ -38,6 +41,7 @@ export class AddressesComponent implements OnInit {
 
   // component lifecycle
   ngOnInit(): void {
+    
     this.getAtivatedSub = this._activatedRoute.paramMap.subscribe({
       next: (params) => {
         this.getCartId = params.get('id');
@@ -68,10 +72,14 @@ export class AddressesComponent implements OnInit {
   AddressSubmit(){
     this.getAddAdressSub = this._addressService.AddAddress(this.registerForm.value).subscribe({
       next: (res) => {
+        this.addingAddress = false;
         this.AllAddress = res.data
+        this._toastrService.success('Address Added Successfully', 'Success', {
+          timeOut: 3000,
+        });
       },
-      error: (err) => {
-        console.log(err);
+      error: () => {
+        this.addingAddress = false;
       }
     })
   }
@@ -81,6 +89,12 @@ export class AddressesComponent implements OnInit {
     this.getAllAdressSub = this._addressService.GetAllAddresses().subscribe({
       next: (res) => {
         this.AllAddress = res.data
+
+        if (this.AllAddress.length === 0) {
+          this._toastrService.info('Please Add Address First', 'Info', {
+            timeOut: 3000,
+          });
+        }
       },
       error: (err) => {
         console.log(err);
@@ -93,6 +107,8 @@ export class AddressesComponent implements OnInit {
     this._addressService.DeleteSpciificAddress(id).subscribe({
       next: (res) => {
         this.AllAddress = res.data
+        this._toastrService.success('Address Deleted Successfully', 'Success', {
+          timeOut: 3000,});
       },
       error: (err) => {
         console.log(err);
@@ -113,6 +129,11 @@ export class AddressesComponent implements OnInit {
       error: (err) => {
         console.log(err);
     }});
+  }
+
+  // Add new Address
+  AddNewAddress(){
+    this.addingAddress = true;
   }
 
 

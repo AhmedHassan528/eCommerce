@@ -22,7 +22,10 @@ export class WishListService {
   constructor(private _http:HttpClient) { }
 
   getWishList():Observable<any>{
-    return this._http.get(`${RouteUrl}/api/v1/wishlist`);
+    if(typeof localStorage !== 'undefined'){
+      return this._http.get(`${RouteUrl}/api/v1/wishlist`);
+    }
+    return new Observable();
   }
 
   addToWishList(productId:string):Observable<any>{

@@ -25,7 +25,6 @@ export class OrdersService {
   constructor( private _http:HttpClient) { }
 
   checkoutSession(cartId:string, address:IAddress):Observable<any>{
-
     return this._http.post(`${RouteUrl}/api/v1/orders/checkout-session/${cartId}?${this.HostUrl}`,
       {
         shippingAddress:{
@@ -36,4 +35,9 @@ export class OrdersService {
       }
       )
   }
+
+  getOrders(id:string):Observable<any> {
+    return this._http.get(`${RouteUrl}/api/v1/orders/user/6407cf6f515bdcf347c09f17`);
+  }
+
 }

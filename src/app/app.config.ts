@@ -11,6 +11,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './core/Interceptor/loading.interceptor';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { provideToastr } from 'ngx-toastr';
+
 
 
 
@@ -22,11 +24,17 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 
 export const appConfig: ApplicationConfig = {
+
+  
+
   providers: [
-    provideRouter(routes, withInMemoryScrolling({scrollPositionRestoration:"top"})), provideClientHydration(),
+    provideAnimations(),
+    provideToastr(),
+    provideRouter(routes, withInMemoryScrolling({scrollPositionRestoration:"top"})),
+    provideClientHydration(),
     provideHttpClient(withFetch(), withInterceptors([loadingInterceptor,headerInterceptor, errorsInterceptor]))
-    , importProvidersFrom(
-      TranslateModule.forRoot({
+    , 
+    importProvidersFrom(TranslateModule.forRoot({
         defaultLanguage: 'en',
         loader: {
           provide: TranslateLoader,
@@ -34,9 +42,9 @@ export const appConfig: ApplicationConfig = {
           deps: [HttpClient]
         }
       }),
+
       NgxSpinnerModule 
     )
-    , provideAnimations()
   ]
 };
 

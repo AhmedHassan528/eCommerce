@@ -4,11 +4,12 @@ import { AuthService } from '../../../../core/services/Auth-Service/auth.service
 import { ErrorComponent } from '../../../additions/Errors/error/error.component';
 import { SucceedComponent } from "../../../additions/Errors/succeed/succeed.component";
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, ErrorComponent, SucceedComponent],
+  imports: [ReactiveFormsModule, ErrorComponent, SucceedComponent, TranslateModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss', '../../../../app.component.scss']
 })

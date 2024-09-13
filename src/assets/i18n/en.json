@@ -1,63 +1,115 @@
 {
-    "navBar" : {
-        "home" : "Home",
-        "cart" : "Cart",
-        "address" : "Address",
-        "products" : "Products",
-        "categories" : "Categories",
-        "brands" : "Brands",
-        "wishlist" : "Wishlist",
-        "signout" : "Sign Out",
-        "login" : "Login",
-        "register" : "Register",
-        "lang" : "EN"
+    "navBar": {
+        "home": "Home",
+        "cart": "Cart",
+        "address": "Address",
+        "products": "Products",
+        "categories": "Categories",
+        "brands": "Brands",
+        "wishlist": "Wishlist",
+        "signout": "Sign Out",
+        "login": "Login",
+        "register": "Register",
+        "lang": "EN",
+        "langName" : "Choose Language",
+        "orderHistory" : "Orders History"
     },
-    "product" : {
-        "add to cart" : "Add to Cart",
-        "egp" : "EGP",
-        "no products found" : "No Products Found"
+    "product": {
+        "add to cart": "Add to Cart",
+        "egp": "EGP",
+        "no products found": "No Products Found"
     },
-    "cart" : {
-        "shopping cart" : "Shopping Cart",
-        "subtotal" : "Subtotal",
-        "ehipping taxes, 14% egypt tax" : "Shipping taxes, 14% Egypt tax",
-        "continue shopping" : "Continue Shopping",
-        "You didn't Add Anything To Cart !!" : "You didn't Add Anything To Cart !!",
-        "checkout" : "Checkout",
+    "cart": {
+        "shopping cart": "Shopping Cart",
+        "subtotal": "Subtotal",
+        "Do You want to clear all cart !!!" : "Do You want to clear all cart !!!",
+        "ehipping taxes, 14% egypt tax": "Shipping taxes, 14% Egypt tax",
+        "continue shopping": "Continue Shopping",
+        "You didn't Add Anything To Cart !!": "You didn't Add Anything To Cart !!",
+        "checkout": "Checkout",
         "Shopping Now": "Shopping Now"
     },
-    "address":{
-        "You didn't Add the Address !!" : "You didn't Add the Address !!",
-        "create new address" : "Create New Address",
-        "your name" : "Your Name",
-        "your details" : "Your Details",
-        "your phone number" : "Your Phone Number",
-        "your city" : "Your City",
+    "address": {
+        "You didn't Add the Address !!": "You didn't Add the Address !!",
+        "create new address": "Create New Address",
+        "your name": "Your Name",
+        "your details": "Your Details",
+        "your phone number": "Your Phone Number",
+        "your city": "Your City",
         "name": "Name",
-        "phone" : "Phone",
-        "city" : "City",
-        "details" : "Details",
-        "delete" : "Delete",
-        "add address" : "Add Address",
-        "use this address" : "Use This Address",
-        "Close modal" : "Close Modal"
+        "phone": "Phone",
+        "city": "City",
+        "details": "Details",
+        "delete": "Delete",
+        "add address": "Add Address",
+        "use this address": "Use This Address",
+        "Close modal": "Close Modal"
     },
-    "wishlist" : {
-        "wishlist" : "Wishlist",
-        "You didn't Add Anything To Wishlist !!" : "You didn't Add Anything To Wishlist !!",
-        "View details" : "View Details",
-        "remove item" : "Remove Item",
-        "your product" : "YOUR PRODUCTS",
-        "title" : "TITLE",
-        "price" : "PRICE",
-        "more options" : "MORE OPTIONS",
+    "wishlist": {
+        "wishlist": "Wishlist",
+        "You didn't Add Anything To Wishlist !!": "You didn't Add Anything To Wishlist !!",
+        "View details": "View Details",
+        "remove item": "Remove Item",
+        "your product": "YOUR PRODUCTS",
+        "title": "TITLE",
+        "price": "PRICE",
+        "more options": "MORE OPTIONS",
         "items": "Items"
     },
-    "general" : {
-        "search products" : "Search Products",
-        "all categories" : "All Categories",
-        "all brands" : "All Brands",
-        "products of Brands" : "products of Brands",
-        "no products found" : "No Products Found"
+    "general": {
+        "search products": "Search Products",
+        "all categories": "All Categories",
+        "all brands": "All Brands",
+        "products of Brands": "products of Brands",
+        "no products found": "No Products Found"
+    },
+    "Auth": {
+        "register now": "Register Now",
+        "name": "Name",
+        "Name is Required": "Name is Required",
+        "The Name must have a maximum of 20 character": "The Name must have a maximum of 20 character",
+        "The Name must have a minmum of 3 character": "The Name must have a minmum of 3 character",
+        "Email is Required": "Email is Required",
+        "The email must have email signature": "The email must have email signature",
+        "email": "Email",
+        "password": "Password",
+        "password is Required": "password is Required",
+        "The password is InValid": "The password is InValid",
+        "repassword": "rePassword",
+        "rePassword Not match with password": "rePassword Not match with password",
+        "phone": "Phone",
+        "phone is Required": "phone is Required",
+        "register": "Register",
+        "login now": "Login Now",
+        "login": "Login",
+        "forgot your password!": "Forgot Your Password!",
+        "Reset Password": "Reset Password",
+        "Send Reset Code": "Send Reset Code",
+        "Reset Code": "Reset Code",
+        "Enter your Reset Code": "Enter your Reset Code",
+        "confirme": "Confirme"
+    },
+    "Footer": {
+        "Get The FreshCart App": "Get The FreshCart App",
+        "We Will Send You a Link, Open it on Your Phone to download the app": "We Will Send You a Link, Open it on Your Phone to download the app",
+        "Share App Link": "Share App Link",
+        "Payment partners": "Payment partners",
+        "Get Deliveries with FreshCart": "Get Deliveries with FreshCart"
+    },
+    "AllOrder":{
+        "Order History" : "Order History",
+        "All Order" : "All Order",
+        "Order" : "Order",
+        "Order Payment" : "Order Payment",
+        "Qty" : "Qty",
+        "Price" : "Price",
+        "Delivery Expected by" : "Delivery Expected by",
+        "Shipping To" : "Shipping To",
+        "Payment Is Succesfull Paid" : "Payment Is Succesfull Paid",
+        "Payment Is Not Paid" : "Payment Is Not Paid",
+        "Total Price" : "Total Price",
+        "Delivered" : "Delivered",
+        "Not Delivered" : "Not Delivered"
+
     }
 }

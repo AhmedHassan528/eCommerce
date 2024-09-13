@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { WishListService } from '../../../core/services/WishListServices/wish-list.service';
 import { IWishList } from '../../../core/Interfaces/iwish-list';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-wish-list',
@@ -16,6 +17,9 @@ export class WishListComponent implements OnInit, OnDestroy {
 
   //data
   GetWishListData:IWishList[] = [];
+
+  private readonly _toastrService = inject(ToastrService);
+
 
   // get Subscriptions
   getWishListSub!:any;
@@ -46,6 +50,9 @@ export class WishListComponent implements OnInit, OnDestroy {
     this._wishListService.removeFromWishList(productId).subscribe({
       next: (res)=>{
         this.getWishList()
+        this._toastrService.success("Product Removed from WishList", "Success", {
+          timeOut: 3000
+        })
       },
       error: (err)=>{
         console.log(err);

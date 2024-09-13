@@ -20,8 +20,12 @@ export class CartComponent implements OnInit, OnDestroy {
 typeof: any;
   constructor(private _cartService: CartService) { }
 
-  // varibles
-  isLoading: boolean = false
+  // varibles ( loading handelers )
+  qtyLoading: boolean = false
+  DeleteLoading: boolean = false;
+  cartId: string = '';
+
+
 
   // font aswsoms 
   faTrash = faTrash;
@@ -60,9 +64,21 @@ typeof: any;
 
   // Remove specific  Item
   DeletespecificItem(id:string): void {
+    this.DeleteLoading = true;
+    this.cartId = id;
+
     this.getDeletespecificItemSub = this._cartService.deleteCartItem(id).subscribe({
       next: (res) => {
         this.cartItems = res.data;
+        this.DeleteLoading = false;
+        this.cartId = '';
+
+        this.countOfCart(res.data.products.length);
+      },
+      error: () => {
+        this.DeleteLoading = false;
+        this.cartId = '';
+
       }
     })
   }
@@ -71,6 +87,7 @@ typeof: any;
   ClearItems(): void {
     this.getDeletespecificItemSub = this._cartService.ClearCar().subscribe({
       next: (res) => {
+        this.countOfCart(0);
         this.cartItems.products = [];
         this.cartItems.totalCartPrice = 0;
       }
@@ -80,7 +97,8 @@ typeof: any;
   // Edit Cart QTY
 
   EditQuantity(id:string, QTY:number, plus:boolean): void {
-    this.isLoading = true
+    this.cartId = id;
+    this.qtyLoading = true;
     if(plus==true){
       QTY +=1
     }else{
@@ -89,11 +107,13 @@ typeof: any;
     this.getDeletespecificItemSub = this._cartService.EditQuantity(id, QTY).subscribe({
       next: (res) => {
         this.cartItems = res.data;
-        this.isLoading = false
+        this.qtyLoading = false
+        this.cartId = '';
+
       },
-      error: (err) => {
-        this.isLoading = false
-        console.log(err);
+      error: () => {
+        this.qtyLoading = false
+        this.cartId = '';
       }
     })
   }
@@ -104,5 +124,10 @@ typeof: any;
     console.log("Check Out");
   }
 
+
+  // handel count of cart
+  countOfCart(CountCart: number): void{
+    this._cartService.cartCount.next(CountCart);
+  }
 
 }

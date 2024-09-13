@@ -3,27 +3,23 @@ import { BrandsService } from '../../../core/services/BrandsServices/brands.serv
 import { IBrands } from '../../../core/Interfaces/ibrands';
 import { ItemService } from '../../../core/services/Items-Service/item.service';
 import { IProduct } from '../../../core/Interfaces/product';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faStar, faStarHalf, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { RouterLink } from '@angular/router';
-import { CurrencyPipe, LowerCasePipe, TitleCasePipe } from '@angular/common';
-import { TermtextPipe } from '../../../core/Pipes/termtext.pipe';
 import { KMPSearchPipe } from '../../../core/Pipes/kmpsearch.pipe';
-import { CartService } from '../../../core/services/CartServices/cart.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProductCardComponent } from "../../global/product-card/product-card.component";
+import { WishListService } from '../../../core/services/WishListServices/wish-list.service';
 
 @Component({
   selector: 'app-brands',
   standalone: true,
-  imports: [FontAwesomeModule, KMPSearchPipe, RouterLink, CurrencyPipe, LowerCasePipe, TitleCasePipe, TermtextPipe, TranslateModule],
+  imports: [KMPSearchPipe, TranslateModule, ProductCardComponent],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.scss'
 })
 export class BrandsComponent implements OnInit, OnDestroy {
 
   @ViewChild('product', { static: false }) productElement!: ElementRef;
+  WishListIDs!: any
 
-  
 
 
   // Servier Message
@@ -31,14 +27,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
   succeed!: Boolean | null;
 
 
-  // Font Awesome Icons
-  faStar = faStar;
-  faStarHalf = faStarHalf;
-  faSpinner = faSpinner;
-
   // Variables
-  AddLoading: Boolean = false
-  itemId!: string;
   BandId!: string | null;
 
   // Subscribing to the BrandsService
@@ -46,7 +35,6 @@ export class BrandsComponent implements OnInit, OnDestroy {
   getBrandByIdSub!: any;
   getItemsByBrandIdSub!: any;
   getAllProductsSub!: any;
-  getCartSub!: any;
 
 
   // Brands Array
@@ -54,7 +42,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
   AllProduct: IProduct[] = [];
 
   // constructor
-  constructor(private _cartService: CartService, private _brandsService: BrandsService, private _itemService: ItemService) { }
+  constructor(private _brandsService: BrandsService, private _itemService: ItemService, private _wishListService:WishListService) { }
 
 
 
@@ -63,12 +51,14 @@ export class BrandsComponent implements OnInit, OnDestroy {
     this.getAllBrands();
     this.getAllProducts();
   }
+  ngAfterViewInit() {
+    this.getWishList();
+  }
   ngOnDestroy(): void {
     this.getAllBrandsSub?.unsubscribe();
     this.getBrandByIdSub?.unsubscribe();
     this.getItemsByBrandIdSub?.unsubscribe();
     this.getAllProductsSub?.unsubscribe();
-    this.getCartSub?.unsubscribe();
   }
 
   // Fetching all the brands
@@ -77,9 +67,6 @@ export class BrandsComponent implements OnInit, OnDestroy {
       next: (response) => {
         this.AllBrands = response.data;
         console.log(this.AllBrands);
-      },
-      error: (error) => {
-        console.log(error);
       }
     })
   }
@@ -91,9 +78,6 @@ export class BrandsComponent implements OnInit, OnDestroy {
         this.BandId = id;
 
         this.getItemsByBrandId(response.data._id);
-      },
-      error: (error) => {
-        console.log(error);
       }
     })
   }
@@ -103,23 +87,10 @@ export class BrandsComponent implements OnInit, OnDestroy {
   getItemsByBrandId(id: string) {
     this._itemService.getItems().subscribe({
       next: (response) => {
-
         this.AllProduct = response.data.filter((item: IProduct) => {
           return item.brand._id === id;
         })
-
-        if (this.AllProduct.length === 0) {
-          console.log('No items found');
-          return;
-        }
-
         this.scrollToProduct();
-
-
-        console.log(this.AllProduct);
-      },
-      error: (error) => {
-        console.log(error);
       }
     })
   }
@@ -128,45 +99,20 @@ export class BrandsComponent implements OnInit, OnDestroy {
   getAllProducts() {
     this.getAllProductsSub = this._itemService.getItems().subscribe({
       next: (response) => {
-
         this.AllProduct = response.data;
-        console.log(this.AllProduct);
-      },
-      error: (error) => {
-        console.log(error);
       }
     })
   }
 
-  // Add to Cart
-  addToCart(id: string): void {
-    this.itemId = id;
-
-    this.AddLoading = true
-
-    this.getCartSub = this._cartService.addCartItem(id).subscribe({
+  
+  // get WishLists
+  getWishList(): void {
+    this._wishListService.getWishList().subscribe({
       next: (res) => {
-        console.log(res);
-        this.succeed = true;
-        this.ServMessage = res.message;
-        this.AddEffect();
-      },
-      error: (err) => {
-        console.log(err);
-        this.succeed = false;
-        this.AddEffect();
+        this.WishListIDs = res.data.map((item: { _id: string; }) => item._id);;
       }
     });
   }
-  AddEffect(): void {
-    setTimeout(() => {
-      this.succeed = null;
-      this.AddLoading = false
-      this.itemId = ''
-    }, 3000);
-  }
-
-
 
   // Scroll to product
   scrollToProduct() {

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Token } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import RouteUrl from '../../../BaseUrl';
 
 @Injectable({
@@ -9,20 +9,17 @@ import RouteUrl from '../../../BaseUrl';
 })
 export class CartService {
 
+  cartCount:BehaviorSubject<number> = new BehaviorSubject(0);
 
-  // getToken(): string | null {
-  //   if (typeof localStorage !== 'undefined') {
-  //     return localStorage.getItem('userToken');
-  //   }
-  //   return null;
-  // }
 
   constructor(private _http: HttpClient) { }
 
-  // myHeaders: any = { Token: this.getToken() };
 
   getCartItems():Observable<any> {
-    return this._http.get(`${RouteUrl}/api/v1/cart`);
+    if(typeof localStorage !== 'undefined'){
+      return this._http.get(`${RouteUrl}/api/v1/cart`);
+    }
+    return new Observable();
   }
 
   addCartItem(id: string):Observable<any> {
