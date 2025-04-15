@@ -11,11 +11,10 @@ import { ProductCardComponent } from "../../global/product-card/product-card.com
 import { WishListService } from '../../../core/services/WishListServices/wish-list.service';
 
 @Component({
-  selector: 'app-products',
-  standalone: true,
-  imports: [TranslateModule, FormsModule, KMPSearchPipe, SucceedComponent, ErrorComponent, ProductCardComponent],
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.scss'
+    selector: 'app-products',
+    imports: [TranslateModule, FormsModule, KMPSearchPipe, SucceedComponent, ErrorComponent, ProductCardComponent],
+    templateUrl: './products.component.html',
+    styleUrl: './products.component.scss'
 })
 export class ProductsComponent {
   // Variables
@@ -39,9 +38,12 @@ export class ProductsComponent {
   // component Lifecycle Hooks
   ngOnInit(): void {
     this.getProducts();
+
+
+
   }
   ngAfterViewInit() {
-    this.getWishList();
+    // this.getWishList();
 
     console.log(this.WishListIDs);
   }
@@ -53,21 +55,21 @@ export class ProductsComponent {
   }
 
 
-  // Get Products
   getProducts(): void {
     this.getItemSub = this._Items.getItems().subscribe({
       next: (res) => {
-        this.Products = res.data;
+        console.log(res)
+        this.Products = res.$values;
       }
     });
   }
 
     // get WishLists
-    getWishList(): void {
-      this._wishListService.getWishList().subscribe({
-        next: (res) => {
-          this.WishListIDs = res.data.map((item: { _id: string; }) => item._id);;
-        }
-      });
-    }
+    // getWishList(): void {
+    //   this._wishListService.getWishList().subscribe({
+    //     next: (res) => {
+    //       this.WishListIDs = res.data.map((item: { _id: string; }) => item._id);;
+    //     }
+    //   });
+    // }
 }

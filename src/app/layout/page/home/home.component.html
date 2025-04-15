@@ -29,12 +29,12 @@
 <!--Categories-->
 <owl-carousel-o [options]="customOptions">
 
-    @for (item of Categories; track item._id) {
+    @for (item of Categories; track item.Id) {
         <ng-template carouselSlide>
             <div class="w-full  md:96 h-64 bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center">
-              <img [src]="item.image" class="w-full h-full" [alt]="item.name">
+              <img [src]="item.Image" class="w-full h-full" [alt]="item.Name">
             </div>
-            <h4 class="text-xs text-center mt-2">{{item.name}}</h4>
+            <h4 class="text-xs text-center mt-2">{{item.Name}}</h4>
           </ng-template>
           
     }
@@ -62,8 +62,7 @@
 
 <!-- products -->
 <section class=" md:grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 md:gap-4 ">
-    @for (item of Products | kMPSearch : SearchWords; track item._id) {
-        <app-product-card [product]="item" [WishListIDs]="WishListIDs"></app-product-card>
-    
+    @for (item of Products | kMPSearch : SearchWords; track item.id) {
+        <app-product-card [product]="item" [productId]="item.id" [WishListIDs]="WishListIDs"></app-product-card>
     }
 </section>

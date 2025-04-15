@@ -14,15 +14,16 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProductCardComponent } from "../../global/product-card/product-card.component";
 import { WishListService } from '../../../core/services/WishListServices/wish-list.service';
 import { NgxSpinnerService, Spinner } from 'ngx-spinner';
+import { AuthService } from '../../../core/services/Auth-Service/auth.service';
+
 
 
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [TranslateModule, FormsModule, CarouselModule, KMPSearchPipe, SucceedComponent, ErrorComponent, ProductCardComponent],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss', '../../../app.component.scss']
+    selector: 'app-home',
+    imports: [TranslateModule, FormsModule, CarouselModule, KMPSearchPipe, SucceedComponent, ErrorComponent, ProductCardComponent],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss', '../../../app.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
@@ -46,7 +47,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   getCategorySub!: Subscription;
 
 
-  constructor( private spinner: NgxSpinnerService, private _Items: ItemService, private _Categories: CategoryService, private _wishListService:WishListService) { }
+  constructor(
+    private spinner: NgxSpinnerService,
+    private _Items: ItemService,
+    private _Categories: CategoryService,
+    private _wishListService: WishListService,
+    private _authService: AuthService
+  ) { }
 
 
   // component Lifecycle Hooks
@@ -54,9 +61,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.spinner.show();
     this.getProducts();
     this.getCategories();
+    
   }
   ngAfterViewInit() {
-    this.getWishList();
+    if (this._authService.getToken()) {
+      this.getWishList();
+    }
     this.spinner.hide();
   }
   ngOnDestroy(): void {
@@ -69,7 +79,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   getProducts(): void {
     this.getItemSub = this._Items.getItems().subscribe({
       next: (res) => {
-        this.Products = res.data;
+        this.Products = res.$values;
       }
     });
   }
@@ -79,20 +89,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getCategorySub = this._Categories.getCategories().subscribe({
 
       next: (res) => {
-        this.Categories = res.data;
+        this.Categories = res.$values;
+        console.log(this.Categories)
+
       }
     })
   }
 
-
-
-
-
   // get WishLists
   getWishList(): void {
-    this._wishListService.getWishList().subscribe({
+    this._wishListService.getWishListIDs().subscribe({
       next: (res) => {
-        this.WishListIDs = res.data.map((item: { _id: string; }) => item._id);;
+        this.WishListIDs = res.ProductsIDs.$values;
       }
     });
   }

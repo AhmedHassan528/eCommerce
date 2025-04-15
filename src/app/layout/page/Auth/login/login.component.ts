@@ -1,29 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/services/Auth-Service/auth.service';
-import { ErrorComponent } from "../../../additions/Errors/error/error.component";
-import { SucceedComponent } from "../../../additions/Errors/succeed/succeed.component";
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, ErrorComponent, SucceedComponent, TranslateModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'app-login',
+    imports: [RouterLink, ReactiveFormsModule, TranslateModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  servError: string | null = null;
   isLoading = false;
 
-  setError(message: string) {
-    this.servError = message;
-  }
-  clearError() {
-    this.servError = null;
-  }
-
+  private readonly _toastrService = inject(ToastrService);
 
   constructor(private _authService: AuthService,private _router:Router, private _formBuilder:FormBuilder) { }
 
@@ -34,26 +25,28 @@ export class LoginComponent {
 
 
   LoginSubmit() {
-    console.log(this.LoginForm); 
+    if (this.LoginForm.invalid) {
+      return;
+    }
+
     this.isLoading = true;
     this._authService.LoginUser(this.LoginForm.value).subscribe({
       next: (res) => {
-        console.log(res);
         this.isLoading = false;
-
-        localStorage.setItem('userToken', res.token);
-        
+        localStorage.setItem('userToken', res.Token);
         this._authService.DecodeUserData();
 
-        setTimeout(() => {
-          this._router.navigate(['/']);
-        }, 1000);
+        this._toastrService.success(res.message, 'Success', {
+          timeOut: 2000,
+        });
+
+        this._router.navigate(['/']);
       },
       error: (err) => {
-
-        this.setError(err.error.message);
         this.isLoading = false;
-        console.log(err);
+        this._toastrService.error(err.error.message || 'Login failed', 'Error', {
+          timeOut: 2000,
+        });
       }
     });
   }

@@ -1,104 +1,161 @@
-<section class="py-24 relative">
+<section class="py-24 relative bg-gray-50">
     <div class="w-full max-w-7xl mx-auto px-4 md:px-8">
-        <h2 class="font-manrope font-extrabold text-3xl lead-10 text-black mb-9">{{"AllOrder.Order History" | translate}}</h2>
+        <h2 class="font-manrope font-extrabold text-4xl text-black mb-12 animate-fade-in">
+            {{"AllOrder.Order History" | translate}}
+        </h2>
 
-        <div class="flex sm:flex-col lg:flex-row sm:items-center justify-between">
+        <div class="flex sm:flex-col lg:flex-row sm:items-center justify-between mb-8">
             <ul class="flex max-sm:flex-col sm:items-center gap-x-14 gap-y-3">
-                <li class="font-medium text-lg leading-8 cursor-pointer main-text-color transition-all duration-500 ">
-                    {{"AllOrder.All Order" | translate}}</li>
+                <li class="font-medium text-lg leading-8 cursor-pointer main-text-color transition-all duration-500 hover:scale-105">
+                    {{"AllOrder.All Order" | translate}}
+                </li>
             </ul>
         </div>
-        @for (item of orders; track item._id) {
 
-        <div class="mt-7 border border-gray-300 pt-9">
-            <div class="flex max-md:flex-col items-center justify-between px-3 md:px-11">
+        @for (item of orders; track item.Id) {
+        <div class="mt-7 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden animate-slide-up">
+            <div class="flex max-md:flex-col items-center justify-between p-6 border-b border-gray-100">
                 <div class="data">
-                    <p class="font-medium text-lg leading-8 text-black whitespace-nowrap">{{"AllOrder.Order" | translate}} : #{{item.id}}</p>
-                    <p class="font-medium text-lg leading-8 text-black mt-3 whitespace-nowrap">{{"AllOrder.Order Payment" | translate}} :
-                        {{item.paymentMethodType}}
+                    <p class="font-medium text-lg leading-8 text-black whitespace-nowrap">
+                        {{"AllOrder.Order" | translate}} : 
+                        <span class="text-main-color">#{{item.Id}}</span>
+                    </p>
+                    <p class="font-medium text-lg leading-8 text-gray-600 mt-3 whitespace-nowrap">
+                        {{"AllOrder.Order Payment" | translate}} : 
+                        <span class="text-gray-800">{{item.paymentMethodType}}</span>
                     </p>
                 </div>
-                <div>
-                    <p class=" text-2xl leading-8 pt-3 main-text-color whitespace-nowrap">
-                        @if (item.isDelivered) {
-                        {{"AllOrder.Delivered" | translate}}
+                <div class="mt-4 md:mt-0">
+                    <p class="text-2xl leading-8 pt-3 whitespace-nowrap">
+                        @if (item.statusMess === 'Delivered') {
+                        <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full animate-pulse">
+                            {{"AllOrder.Delivered" | translate}}
+                        </span>
+                        }@else if (item.statusMess === 'Pending') {
+                        <span class="px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full">
+                            {{"AllOrder.Pending" | translate}}
+                        </span>
+                        }@else if (item.statusMess === 'Received') {
+                        <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full">
+                            {{"AllOrder.Received" | translate}}
+                        </span>
+                        }@else if (item.statusMess === 'Canceled') {
+                        <span class="px-4 py-2 bg-red-100 text-red-800 rounded-full">
+                            {{"AllOrder.Canceled" | translate}}
+                        </span>
                         }@else {
-                        {{"AllOrder.Not Delivered" | translate}}
+                        <span class="px-4 py-2 bg-gray-100 text-gray-800 rounded-full">
+                            {{item.statusMess}}
+                        </span>
                         }
                     </p>
                 </div>
             </div>
-            <svg class="my-9 w-full" xmlns="http://www.w3.org/2000/svg" width="1216" height="2" viewBox="0 0 1216 2"
-                fill="none">
-                <path d="M0 1H1216" stroke="#D1D5DB" />
-            </svg>
 
-            @for (product of item.cartItems; track product.product._id) {
-            <div class="flex max-lg:flex-col items-center gap-8 lg:gap-24 px-3 md:px-11">
-                <div class="grid grid-cols-4 w-full">
-                    <div class="col-span-4 sm:col-span-1">
-                        <img src="{{product.product.imageCover}}" alt="{{product.product.title}}"
-                            class="max-sm:mx-auto object-cover">
+            @for (product of item.Items.$values; track product.Id) {
+            <div class="p-6 hover:bg-gray-50 transition-colors duration-300">
+                <div class="flex max-lg:flex-col items-center gap-8 lg:gap-24">
+                    <div class="grid grid-cols-4 w-full">
+                        <div class="col-span-4 sm:col-span-1">
+                            <img src="{{product.ProductImage}}"
+                                class="w-full h-48 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
+                        </div>
+                        <div class="col-span-4 sm:col-span-3 max-sm:mt-4 sm:pl-8 flex flex-col justify-center max-sm:items-center">
+                            <h6 class="font-manrope font-semibold text-xl leading-9 text-black mb-3 hover:text-main-color transition-colors duration-300">
+                                {{product.ProductName| termtext: 4}}
+                            </h6>
+                            <p class="font-normal text-lg leading-8 text-gray-500 mb-8 whitespace-nowrap">
+                                By: <span class="text-gray-700">{{product.Brand}}</span>
+                            </p>
+                            <div class="flex items-center max-sm:flex-col gap-x-10 gap-y-3">
+                                <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">
+                                    {{"AllOrder.Qty" | translate}}: {{product.Count}}
+                                </span>
+                                <p class="font-semibold text-xl leading-8 text-main-color whitespace-nowrap">
+                                    {{"AllOrder.Price" | translate}} {{product.Price| currency:"EGP"}}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div
-                        class="col-span-4 sm:col-span-3 max-sm:mt-4 sm:pl-8 flex flex-col justify-center max-sm:items-center">
-                        <h6 class="font-manrope font-semibold text-xl leading-9 text-black mb-3">
-                            {{product.product.title| termtext: 4}}
-                        </h6>
-                        <p class="font-normal text-lg leading-8 text-gray-500 mb-8 whitespace-nowrap">By:
-                            {{product.product.brand.name}}
-                        </p>
-                        <div class="flex items-center max-sm:flex-col gap-x-10 gap-y-3">
-                            <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">{{"AllOrder.Qty" | translate}}:
-                                {{product.count}}
-                            </span>
-                            <p class="font-semibold text-xl leading-8 text-black whitespace-nowrap">{{"AllOrder.Price" | translate}}
-                                {{product.price | currency:"EGP"}}</p>
+                    <div class="flex items-center justify-around w-full sm:pl-28 lg:pl-0">
+                        <div class="flex flex-col justify-center items-start max-sm:items-center">
+                            <div class="mb-4">
+                                <p class="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
+                                    {{"AllOrder.Delivery Expected by"|translate}}
+                                </p>
+                                <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap">
+                                    {{item.OrderDate | date}}
+                                </p>
+                            </div>
+
+                            <div>
+                                <p class="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
+                                    {{"AllOrder.Shipping To"|translate}}:
+                                </p>
+                                <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap">
+                                    {{item.AddressName}}, {{item.Address}}, {{item.PhoneNumber}}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center justify-around w-full  sm:pl-28 lg:pl-0">
-                    <div class="flex flex-col justify-center items-start max-sm:items-center">
-                        <p class="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
-                            {{"AllOrder.Delivery Expected by"|translate}}</p>
-                        <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap mb-4">
-                            {{item.createdAt | date}}</p>
-
-                        <p class="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
-                            {{"AllOrder.Shipping To"|translate}}:</p>
-                        <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap">
-
-                            {{item.shippingAddress?.city}}, {{item.shippingAddress?.details}},
-                            {{item.shippingAddress?.phone}},
-
-                        </p>
-                    </div>
-                </div>
-
-
-
             </div>
-            <svg class="my-9 w-full" xmlns="http://www.w3.org/2000/svg" width="1216" height="2" viewBox="0 0 1216 2"
-                fill="none">
-                <path d="M0 1H1216" stroke="#D1D5DB" />
-            </svg>
             }
 
-
-            <div class="px-3 md:px-11 flex items-center justify-between max-sm:flex-col-reverse">
+            <div class="px-6 py-4 bg-gray-50 flex items-center justify-between max-sm:flex-col-reverse">
                 <div class="flex max-sm:flex-col-reverse items-center py-3">
                     <p class="font-normal text-xl leading-8 main-text-color sm:pl-8">
-                        @if (item.isPaid) {
-                        {{"AllOrder.Payment Is Succesfull Paid" | translate}}
+                        @if (item.status) {
+                        <span class="px-4 py-2 bg-green-100 text-green-800 rounded-full">
+                            {{"AllOrder.Payment Is Succesfull Paid" | translate}}
+                        </span>
                         }@else {
-                        <span class="text-red-600">{{"AllOrder.Payment Is Not Paid" | translate}} </span>
+                        <span class="px-4 py-2 bg-red-100 text-red-800 rounded-full">
+                            {{"AllOrder.Payment Is Not Paid" | translate}}
+                        </span>
                         }
                     </p>
                 </div>
-                <p class="font-medium text-xl leading-8 text-black max-sm:py-4"> <span class="text-gray-500">
-                    {{"AllOrder.Total Price" | translate}}: </span> {{item.totalOrderPrice | currency: "EGP"}}</p>
+                <p class="font-medium text-xl leading-8 text-black max-sm:py-4">
+                    <span class="text-gray-500">{{"AllOrder.Total Price" | translate}}: </span>
+                    <span class="text-main-color font-bold">{{item.TotalAmount | currency: "EGP"}}</span>
+                </p>
             </div>
         </div>
-    }
+        }
     </div>
 </section>
+
+<style>
+    @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slide-up {
+        from { 
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to { 
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.6s ease-out;
+    }
+
+    .animate-slide-up {
+        animation: slide-up 0.5s ease-out;
+    }
+
+    .main-color {
+        color: #3B82F6;
+    }
+
+    .bg-main-color {
+        background-color: #3B82F6;
+    }
+</style>

@@ -1,7 +1,7 @@
 import { Brand, IProduct } from './../../../core/Interfaces/product';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar, faStarHalf, faHeart, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { Component,  OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ItemService } from '../../../core/services/Items-Service/item.service';
@@ -10,13 +10,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { WishListService } from '../../../core/services/WishListServices/wish-list.service';
 import { CartService } from '../../../core/services/CartServices/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../core/services/Auth-Service/auth.service';
 
 @Component({
-  selector: 'app-product-details',
-  standalone: true,
-  imports: [FontAwesomeModule, TranslateModule ,CarouselModule,RouterLink],
-  templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.scss'
+    selector: 'app-product-details',
+    standalone: true,
+    imports: [FontAwesomeModule, TranslateModule, CarouselModule, RouterLink],
+    templateUrl: './product-details.component.html',
+    styleUrl: './product-details.component.scss',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
 
@@ -46,9 +48,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   // temp valriables
   Brand!: string ;
+  imageList:string[] = [];
 
   
-  constructor(private _activatedRoute: ActivatedRoute, private _itemService: ItemService, private _wishListService:WishListService, private _cartService:CartService, private _toastrService:ToastrService) { }
+  constructor(private _activatedRoute: ActivatedRoute, private _itemService: ItemService, private _wishListService:WishListService, private _cartService:CartService, private _toastrService:ToastrService, private _authService:AuthService) { }
 
   // component life cycle
   ngOnInit(): void {
@@ -57,8 +60,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.getProductDetails(params.get('id')!);
       }
     });
-
-    this.getLoggedWishList();
+    if (this._authService.getToken()) {
+      this.getLoggedWishList();
+    }
   }
   ngOnDestroy(): void {
     this.getAtivatedSub?.unsubscribe();
@@ -69,9 +73,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   getProductDetails(id: string) {
     this.getItemServiceSub = this._itemService.getItemDetails(id).subscribe({
       next: (data) => {
-        this.getDetails = data.data;
-        this.Brand = this.getDetails.brand.name;
-
+        this.getDetails = data;
+        this.imageList = data.Images.$values;
+        console.log(this.imageList);
+        
       },
       error: (error) => {
         console.log(error);
@@ -82,10 +87,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   //wishList function
   getLoggedWishList() {
     this.wishListLoading = true;
-  this.getLoggedWishListSub = this._wishListService.getWishList().subscribe({
+  this.getLoggedWishListSub = this._wishListService.getWishListIDs().subscribe({
     next: (data) => {
-      data.data.forEach((element: any) => {
-        if (element._id === this.getDetails._id) {
+      data.ProductsIDs.$values.forEach((element: any) => {
+        if (element._id === this.getDetails.Id) {
           this.wishList = true;
           this.wishListLoading = false
         }else{
@@ -102,7 +107,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   // add to wishList
   addToWishList() {
     this.wishListLoading = true;
-    this._wishListService.addToWishList(this.getDetails._id).subscribe({
+    this._wishListService.addToWishList(this.getDetails.Id).subscribe({
       next: (res) => {
         this.wishListLoading = false;
         this.wishList = true;
@@ -120,7 +125,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   removeFromWishList() {
     this.wishListLoading = true;
 
-    this._wishListService.removeFromWishList(this.getDetails._id).subscribe({
+    this._wishListService.removeFromWishList(this.getDetails.Id).subscribe({
       next: (res) => {
         this.wishList = false;
         this.wishListLoading = false;
@@ -137,7 +142,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   // add to cart
   addToCart() {
     this.AddingToCart = true;
-    this._cartService.addCartItem(this.getDetails._id).subscribe({
+    this._cartService.addCartItem(this.getDetails.Id).subscribe({
       next: (res) => {
         this._toastrService.success(res.message, res.status, {
           timeOut: 3000

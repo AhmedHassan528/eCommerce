@@ -1,40 +1,32 @@
 export interface IProduct {
-    sold: number
-    images: string[]
-    subcategory: Subcategory[]
-    ratingsQuantity: number
-    _id: string
-    title: string
-    slug: string
-    description: string
-    quantity: number
-    price: number
-    imageCover: string
-    category: Category
-    brand: Brand
-    ratingsAverage: number
-    createdAt: string
-    updatedAt: string
-    id: string
-}
-
-export interface Subcategory {
-    _id: string
-    name: string
-    slug: string
-    category: string
+  Id: number
+  NumSold: number
+  LikeCount: number
+  RatingsQuantity: number
+  Title: string
+  Description: string
+  Price: number
+  CategoryName: string
+  BrandName: string
+  ViewCount: number
+  ImageCover: string
+  Images: Images
+  Category: Category
+  Brand: Brand
 }
 
 export interface Category {
-    _id: string
-    name: string
-    slug: string
-    image: string
+  Id: number
+  Name: string
+  Image: string
 }
 
 export interface Brand {
-    _id: string
-    name: string
-    slug: string
-    image: string
+  Id: number
+  Name: string
+  Image: string
 }
+export interface Images {
+    $values: string[]
+}
+

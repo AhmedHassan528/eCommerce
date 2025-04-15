@@ -1,0 +1,8 @@
+<script src="https://js.stripe.com/v3/"></script>
+<div>
+  <h2>Pay with Stripe Checkout</h2>
+  <input type="number" [(ngModel)]="amount" placeholder="Enter amount in cents" min="50" />
+  <button (click)="createCheckoutSession()" [disabled]="!stripe || !amount || amount < 50">
+    Go to Checkout
+  </button>
+</div>

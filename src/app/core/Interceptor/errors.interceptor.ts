@@ -1,28 +1,62 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { privateDecrypt } from 'crypto';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, throwError } from 'rxjs';
-import { ToasterService } from '../services/ToasterServices/toaster.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
 
 export const errorsInterceptor: HttpInterceptorFn = (req, next) => {
-
   const loading = inject(NgxSpinnerService);
-  const _toastrService = inject(ToastrService);
+  const toastr = inject(ToastrService);
+  const router = inject(Router);
 
+  return next(req).pipe(
+    catchError((error: HttpErrorResponse) => {
+      loading.hide();
+      
+      // Only log errors in development mode
+      if (!environment.production) {
+        console.log('Error intercepted:', error);
+      }
 
-  return next(req).pipe(catchError((error) => {
+      // Skip error handling for certain URLs or conditions
+      if (req.url.includes('background') || req.url.includes('health-check')) {
+        return throwError(() => error);
+      }
 
+      // Handle specific error codes
+      switch (error.status) {
+        case 404:
+          toastr.error('Resource not found', 'Not Found');
+          router.navigate(['/not-found']);
+          break;
 
-    console.log("interceptors ", error);
-    loading.hide();
-    
-    _toastrService.error( error.error.message , error.error.statusMsg, {
-      timeOut: 3000,
-    });
+        case 403:
+          // For 403 errors, only show toastr and navigate if it's a page request
+          if (req.url.includes('/api/')) {
+            toastr.error('You do not have permission to access this resource', 'Access Denied');
+            router.navigate(['/unauthorized']);
+          }
+          break;
 
-    return throwError(() => "error");
-  }));
+        case 401:
+          toastr.error('Please login to continue', 'Unauthorized');
+          router.navigate(['/login']);
+          break;
 
+        default:
+          // For other errors, only show toastr for critical errors (500+)
+          if (error.status >= 500) {
+            const errorMessage = error.error?.message || error.message || 'An unexpected error occurred';
+            const errorTitle = error.error?.statusMsg || 'Error';
+            toastr.error(errorMessage, errorTitle, {
+              timeOut: 3000,
+            });
+          }
+      }
+
+      return throwError(() => error);
+    })
+  );
 };

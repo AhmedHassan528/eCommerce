@@ -1,10 +1,13 @@
 <div class="flex flex-col justify-between min-h-screen">
-    <app-nav-bar/>
+    <app-nav-bar [@fadeIn]/>
     <div class="container mx-auto">
-        <router-outlet></router-outlet>
+        <div [@pageTransition]>
+            <router-outlet></router-outlet>
+        </div>
     </div>
 
-    <app-footer/>
+    <app-chat [@fadeIn]></app-chat>
+    <app-footer [@fadeIn]/>
 </div>
 
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>

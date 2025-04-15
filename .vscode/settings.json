@@ -3,5 +3,11 @@
     "azureFunctions.projectLanguage": "C#",
     "azureFunctions.projectRuntime": "~4",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.preDeployTask": "publish (functions)"
+    "azureFunctions.preDeployTask": "publish (functions)",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/7fa8dad0-5fcf-4357-835d-15b47517cef5/resourceGroups/GraduateProject/providers/Microsoft.Web/sites/freeeshcaaart",
+    "appService.deploySubpath": "dist\\ecommerce"
 }

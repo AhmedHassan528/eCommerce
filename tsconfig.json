@@ -18,11 +18,18 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
+    "strictPropertyInitialization": true,
+    "typeRoots": ["node_modules/@types"],
+    "types": ["stripe-v3"],
     "lib": [
       "ES2022",
       "dom"
     ]
   },
+  "include": [
+    "src/**/*",
+    "src/typings.d.ts" // Add this line
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

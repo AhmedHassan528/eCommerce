@@ -1,49 +1,53 @@
 export interface ICart {
-    _id: string
-    cartOwner: string
-    products: Product[]
-    createdAt: string
-    updatedAt: string
-    __v: number
-    totalCartPrice: number
+  Id: number
+  CartOwner: string
+  Products: Products
+  TotalCartPrice: number
+  CreatedAt: string
+  UpdatedAt: string
+  TenantId: string
+}
+
+export interface Products {
+  $values: Value[]
+}
+
+export interface Value {
+  Id: number
+  Count: number
+  Price: number
+  ProductId: number
+  Product: Product
+  CartId: number
+  TenantId: string
 }
 
 export interface Product {
-    count: number
-    _id: string
-    product: Product2
-    price: number
+  Id: number
+  NumSold: number
+  RatingsQuantity: number
+  Title: string
+  Description: string
+  Price: number
+  ViewCount: number
+  ImageCover: string
+  Images: Images
+  Category: Category
+  Brand: Brand
 }
 
-export interface Product2 {
-    subcategory: Subcategory[]
-    _id: string
-    title: string
-    quantity: number
-    imageCover: string
-    category: Category
-    brand: Brand
-    ratingsAverage: number
-    id: string
-}
-
-export interface Subcategory {
-    _id: string
-    name: string
-    slug: string
-    category: string
+export interface Images {
+  $values: string[]
 }
 
 export interface Category {
-    _id: string
-    name: string
-    slug: string
-    image: string
+  Id: number
+  Name: string
+  Image: string
 }
 
 export interface Brand {
-    _id: string
-    name: string
-    slug: string
-    image: string
+  Id: number
+  Name: string
+  Image: string
 }

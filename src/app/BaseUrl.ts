@@ -1,5 +1,5 @@
-const RouteUrl = 'https://ecommerce.routemisr.com';
-const HostUrl = 'localhost:4200';
+const RouteUrl = 'https://localhost:7060';
+const tenantkey = "linkedIn";
 
 
 export default RouteUrl;

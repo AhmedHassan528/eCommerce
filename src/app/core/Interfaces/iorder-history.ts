@@ -1,72 +1,42 @@
 export interface IorderHostory {
-    shippingAddress?: ShippingAddress
-    taxPrice: number
-    shippingPrice: number
-    totalOrderPrice: number
-    paymentMethodType: string
-    isPaid: boolean
-    isDelivered: boolean
-    _id: string
-    user: User
-    cartItems: CartItem[]
-    createdAt: string
-    updatedAt: string
-    id: number
-    __v: number
-    paidAt?: string
+  Id: number
+  CartId: number
+  TotalAmount: number
+  status: boolean
+  statusMess: string
+  paymentMethodType: string
+  CustomerName: string
+  AddressId: number
+  AddressName: string
+  City: string
+  Address: string
+  PhoneNumber: string
+  Items: Items
+  OrderDate: string
+  // Tracking information
+  trackingNumber?: string
+  carrier?: string
+  estimatedDelivery?: string
+  assignedTo?: string
+  lastTrackingUpdate?: string
+  currentLocation?: string
+  trackingNotes?: string
 }
 
-
-export interface ShippingAddress {
-    details: string
-    city: string
-    phone?: string
-    postalCode?: string
+export interface Items {
+  $values: Value2[]
 }
-
-export interface User {
-    _id: string
-    name: string
-    email: string
-    phone: string
-}
-
-export interface CartItem {
-    count: number
-    product: Product
-    price: number
-    _id: string
-}
-
-export interface Product {
-    subcategory: Subcategory[]
-    ratingsQuantity: number
-    _id: string
-    title: string
-    imageCover: string
-    category: Category
-    brand: Brand
-    ratingsAverage: number
-    id: string
-}
-
-export interface Subcategory {
-    _id: string
-    name: string
-    slug: string
-    category: string
-}
-
-export interface Category {
-    _id: string
-    name: string
-    slug: string
-    image: string
-}
-
-export interface Brand {
-    _id: string
-    name: string
-    slug: string
-    image: string
+export interface Value2 {
+  Id: number
+  OrderId: number
+  Count: number
+  Price: number
+  ProductId: number
+  ProductName: string
+  ProductImage: string
+  ProductDescription: string
+  Category: string
+  Brand: string
+  CategoryId?: number
+  BrandId?: number
 }

@@ -1,34 +1,38 @@
-import { dirname } from 'node:path';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AddressService } from '../../../core/services/AddressServices/address.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IAddress } from '../../../core/Interfaces/iaddress';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPhone, faCity, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { OrdersService } from '../../../core/services/OrdersServices/orders.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
+import { PaymentService } from '../../../core/services/PaymentServices/payment.service';
 
 @Component({
-  selector: 'app-addresses',
-  standalone: true,
-  imports: [ReactiveFormsModule, TranslateModule ,FontAwesomeModule],
-  templateUrl: './addresses.component.html',
-  styleUrl: './addresses.component.scss'
+    selector: 'app-addresses',
+    imports: [ReactiveFormsModule, TranslateModule, FontAwesomeModule],
+    templateUrl: './addresses.component.html',
+    styleUrl: './addresses.component.scss'
 })
 export class AddressesComponent implements OnInit {
   // Font Awesome
-  faTrash = faTrash
+  faTrash = faTrash;
+  faPhone = faPhone;
+  faCity = faCity;
+  faMapMarkerAlt = faMapMarkerAlt;
 
   // varibles
-  getCartId!: string | null;
+  getCartId!: number | null;
   addingAddress = false;
+  loading = false;
+  error: string | null = null;
 
   private readonly _toastrService = inject(ToastrService);
 
   // constructor
-  constructor(private _addressService:AddressService,private _ordersService:OrdersService, private _activatedRoute: ActivatedRoute) { }
+  constructor(private _addressService:AddressService, private _activatedRoute: ActivatedRoute, private _paymentService:PaymentService) { }
 
   // get subscribtions
   getAddAdressSub! : any 
@@ -44,7 +48,7 @@ export class AddressesComponent implements OnInit {
     
     this.getAtivatedSub = this._activatedRoute.paramMap.subscribe({
       next: (params) => {
-        this.getCartId = params.get('id');
+        this.getCartId = params.get('id') ? Number(params.get('id')) : null;
       }
     });
 
@@ -58,13 +62,13 @@ export class AddressesComponent implements OnInit {
 
   // Form Group
   registerForm: FormGroup = new FormGroup({
-    name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+    AddressName: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
 
-    details: new FormControl(null, [Validators.required]),
+    Address: new FormControl(null, [Validators.required]),
 
-    phone: new FormControl(null, [Validators.required]),
+    phoneNumber: new FormControl(null, [Validators.required]),
 
-    city: new FormControl(null, [Validators.required]),
+    City: new FormControl(null, [Validators.required]),
   });
 
 
@@ -73,7 +77,7 @@ export class AddressesComponent implements OnInit {
     this.getAddAdressSub = this._addressService.AddAddress(this.registerForm.value).subscribe({
       next: (res) => {
         this.addingAddress = false;
-        this.AllAddress = res.data
+        this.GetAllAddresses();
         this._toastrService.success('Address Added Successfully', 'Success', {
           timeOut: 3000,
         });
@@ -88,7 +92,7 @@ export class AddressesComponent implements OnInit {
   GetAllAddresses(){
     this.getAllAdressSub = this._addressService.GetAllAddresses().subscribe({
       next: (res) => {
-        this.AllAddress = res.data
+        this.AllAddress = res.$values
 
         if (this.AllAddress.length === 0) {
           this._toastrService.info('Please Add Address First', 'Info', {
@@ -103,10 +107,10 @@ export class AddressesComponent implements OnInit {
   }
 
   // Delete Spciific Address Function
-  DeleteAddress(id:string){
+  DeleteAddress(id:number){
     this._addressService.DeleteSpciificAddress(id).subscribe({
       next: (res) => {
-        this.AllAddress = res.data
+        this.AllAddress = res.$values
         this._toastrService.success('Address Deleted Successfully', 'Success', {
           timeOut: 3000,});
       },
@@ -116,19 +120,31 @@ export class AddressesComponent implements OnInit {
     })
   }
 
-  // Add Order Function
 
-  Onlinecheckout(Cartid:string, address:IAddress){
-    this._ordersService.checkoutSession(Cartid, address).subscribe({
-      next: (res) => {
-        if (res.status === 'success') {
-          window.location.href = res.session.url
-        }
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-    }});
+
+   async Onlinecheckout(Cartid:number, address:IAddress){
+    this.loading = true;
+    this.error = null;
+    console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+
+    try {
+
+      const response = await this._paymentService.createPayment(Cartid,address.Id,"http://localhost:4200/").toPromise();
+      // console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+      // console.log(response);
+
+      // Step 3: Redirect to Stripe Checkout
+      const stripe = await this._paymentService.initializeStripe();
+      const { error } = await stripe.redirectToCheckout({ sessionId: response.sessionId });
+
+      if (error) {
+        this.error = error.message;
+      }
+    } catch (err) {
+      // this.error = err.error || 'Failed to process payment';
+    } finally {
+      this.loading = false;
+    }
   }
 
   // Add new Address

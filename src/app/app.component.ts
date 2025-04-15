@@ -5,13 +5,15 @@ import { FlowbiteService } from './core/services/FlowBite/flowbite-service.servi
 import { NavBarComponent } from "./layout/additions/nav-bar/nav-bar.component";
 import { FooterComponent } from "./layout/additions/footer/footer.component";
 import { NgxSpinnerComponent } from 'ngx-spinner';
+import { ChatComponent } from "./layout/additions/chat/chat.component";
+import { pageTransition, fadeIn } from './shared/animations/animations';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, NavBarComponent, FooterComponent, NgxSpinnerComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [RouterOutlet, NavBarComponent, FooterComponent, NgxSpinnerComponent, ChatComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    animations: [pageTransition, fadeIn]
 })
 export class AppComponent {
   

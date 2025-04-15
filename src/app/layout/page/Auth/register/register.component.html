@@ -17,23 +17,83 @@
             <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{"Auth.name" | translate}}:</label>
             <input type="text" id="text"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required formControlName="name" />
-            @if (registerForm.get("name")?.errors && registerForm.get("name")?.touched)
+                required formControlName="UserName" />
+            @if (registerForm.get("UserName")?.errors && registerForm.get("UserName")?.touched)
             {
-            @if (registerForm.get("name")?.getError("required"))
+            @if (registerForm.get("UserName")?.getError("required"))
             {
             <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                 <span class="block sm:inline">{{"Auth.Name is Required" | translate}}.</span>
             </div>
             }
-            @else if (registerForm.get("name")?.getError("maxlength"))
+            @else if (registerForm.get("UserName")?.getError("maxlength"))
             {
             <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                 <span class="block sm:inline"> {{"Auth.The Name must have a maximum of 20 character" | translate}} </span>
             </div>
             }
     
-            @else if (registerForm.get("name")?.getError("minlength"))
+            @else if (registerForm.get("UserName")?.getError("minlength"))
+            {
+            <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{"Auth.The Name must have a minmum of 3 character" | translate}}</span>
+            </div>
+            }
+    
+            }
+        </div>
+
+        <div class="mb-5">
+            <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{"Auth.FirstName" | translate}}:</label>
+            <input type="text" id="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required formControlName="FirstName" />
+            @if (registerForm.get("FirstName")?.errors && registerForm.get("FirstName")?.touched)
+            {
+            @if (registerForm.get("FirstName")?.getError("required"))
+            {
+            <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{"Auth.Name is Required" | translate}}.</span>
+            </div>
+            }
+            @else if (registerForm.get("FirstName")?.getError("maxlength"))
+            {
+            <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline"> {{"Auth.The Name must have a maximum of 20 character" | translate}} </span>
+            </div>
+            }
+    
+            @else if (registerForm.get("FirstName")?.getError("minlength"))
+            {
+            <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{"Auth.The Name must have a minmum of 3 character" | translate}}</span>
+            </div>
+            }
+    
+            }
+        </div>
+
+        <div class="mb-5">
+            <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{"Auth.LastName" | translate}}:</label>
+            <input type="text" id="text"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required formControlName="LastName" />
+            @if (registerForm.get("LastName")?.errors && registerForm.get("LastName")?.touched)
+            {
+            @if (registerForm.get("LastName")?.getError("required"))
+            {
+            <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{"Auth.Name is Required" | translate}}.</span>
+            </div>
+            }
+            @else if (registerForm.get("LastName")?.getError("maxlength"))
+            {
+            <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline"> {{"Auth.The Name must have a maximum of 20 character" | translate}} </span>
+            </div>
+            }
+    
+            @else if (registerForm.get("LastName")?.getError("minlength"))
             {
             <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                 <span class="block sm:inline">{{"Auth.The Name must have a minmum of 3 character" | translate}}</span>
@@ -48,17 +108,17 @@
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{"Auth.email" | translate}}</label>
             <input type="email" id="email"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="example@example.com" required formControlName="email" />
+                placeholder="example@example.com" required formControlName="Email" />
     
-            @if (registerForm.get("email")?.errors && registerForm.get("email")?.touched)
+            @if (registerForm.get("Email")?.errors && registerForm.get("Email")?.touched)
             {
-            @if (registerForm.get("email")?.getError("required"))
+            @if (registerForm.get("Email")?.getError("required"))
             {
             <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                 <span class="block sm:inline">{{"Auth.Email is Required" | translate}}</span>
             </div>
             }
-            @else if (registerForm.get("email")?.getError("email"))
+            @else if (registerForm.get("Email")?.getError("email"))
             {
             <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                 <span class="block sm:inline">{{"Auth.The email must have email signature" | translate}} </span>
@@ -73,17 +133,17 @@
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{"Auth.password" | translate}}</label>
             <input type="password" id="password"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required formControlName="password" />
+                required formControlName="Password" />
     
-            @if (registerForm.get("password")?.errors && registerForm.get("password")?.touched)
+            @if (registerForm.get("Password")?.errors && registerForm.get("Password")?.touched)
             {
-            @if (registerForm.get("password")?.getError("required"))
+            @if (registerForm.get("Password")?.getError("required"))
             {
             <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                 <span class="block sm:inline">{{"Auth.password is Required" | translate}}</span>
             </div>
             }
-            @else if (registerForm.get("password")?.getError("pattern"))
+            @else if (registerForm.get("Password")?.getError("pattern"))
             {
             <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                 <span class="block sm:inline">{{"Auth.The password is InValid" | translate}}</span>
@@ -103,25 +163,6 @@
                 <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                     <span class="block sm:inline">{{"Auth.rePassword Not match with password" | translate}}</span>
                 </div>
-            }
-        </div>
-    
-        <div class="mb-3">
-            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{"Auth.phone" | translate}}:</label>
-            <input type="number" id="phone"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required formControlName="phone" />
-    
-            @if (registerForm.get("phone")?.errors && registerForm.get("phone")?.touched)
-            {
-            @if (registerForm.get("phone")?.getError("required"))
-            {
-            <div class="mt-1 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                <span class="block sm:inline">
-                    {{"Auth.phone is Required" | translate}}
-                </span>
-            </div>
-            }
             }
         </div>
         <div class="flex justify-end">

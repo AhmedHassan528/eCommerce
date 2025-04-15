@@ -9,7 +9,7 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const loading = inject(NgxSpinnerService);
   const router = inject(Router);
 
-  if (req.url.includes('wishlist') || req.url.includes('cart')) {
+  if (req.url.includes('wishlist') || req.url.includes('cart') || req.url.includes('Chat')) {
     return next(req);
   }
   loading.show();

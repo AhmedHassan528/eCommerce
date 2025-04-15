@@ -1,0 +1,1 @@
+import("./dist/ecommerce/server/server.mjs");

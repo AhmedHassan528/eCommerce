@@ -1,43 +1,31 @@
 export interface IWishList {
-    sold: number
-    images: string[]
-    subcategory: Subcategory[]
-    ratingsQuantity: number
-    _id: string
-    title: string
-    slug: string
-    description: string
-    quantity: number
-    price: number
-    imageCover: string
-    category: Category
-    brand: Brand
-    ratingsAverage: number
-    createdAt: string
-    updatedAt: string
-    __v: number
-    id: string
+    Id: number
+    NumSold: number
+    RatingsQuantity: number
+    Title: string
+    Description: string
+    Price: number
+    ImageCover: string
+    Images: Images
+    CategoryName: string
+    BrandName: string
+    Category: Category
+    Brand: Brand
 }
 
-
-export interface Subcategory {
-    _id: string
-    name: string
-    slug: string
-    category: string
-}
+export interface Images {
+    $values: string[]
+  }
 
 export interface Category {
-    _id: string
-    name: string
-    slug: string
-    image: string
+  Id: number
+  Name: string
+  Image: string
 }
 
 export interface Brand {
-    _id: string
-    name: string
-    slug: string
-    image: string
+  $id: string
+  Id: number
+  Name: string
+  Image: string
 }
-

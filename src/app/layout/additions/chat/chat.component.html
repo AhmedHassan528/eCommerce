@@ -1,0 +1,45 @@
+<!-- Chatbot Container -->
+<div @slideInOut *ngIf="isChatOpen" class="fixed bottom-16 right-4 flex flex-col gap-4 w-full max-w-[360px] bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 shadow-md">
+    <!-- Close Button (Top Left) -->
+    <button class="absolute top-2 left-2 p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:ring-2 focus:ring-gray-300 rounded-full" (click)="toggleChat()">
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+        <span class="sr-only">Close chat</span>
+    </button>
+
+    <!-- Scrollable Message Area -->
+    <div class="flex flex-col gap-4 max-h-[300px] overflow-y-auto">
+        @for (msg of messages; track $index) {
+            <div [ngClass]="{'justify-end': msg.sender === 'You', 'items-start': msg.sender !== 'You'}" class="flex gap-2.5">
+                <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200" [ngClass]="{'bg-blue-100 rounded-s-xl rounded-ee-xl dark:bg-blue-700': msg.sender === 'You', 'bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700': msg.sender !== 'You'}">
+                    <div class="flex items-center space-x-2 rtl:space-x-reverse" [ngClass]="{'justify-end': msg.sender === 'You'}">
+                        <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ msg.sender }}</span>
+                        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ msg.timestamp }}</span>
+                    </div>
+                    <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{{ msg.text }}</p>
+                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400" [ngClass]="{'text-right': msg.sender === 'You'}">{{ msg.status }}</span>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Text Input Area and Send Button -->
+    <div class="flex items-center gap-2">
+        <input type="text" placeholder="Type your message..." class="flex-1 p-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:focus:ring-blue-600 dark:focus:border-blue-600" [(ngModel)]="message" (keyup.enter)="sendMessage()" />
+        <button type="button" class="p-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800" (click)="sendMessage()">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l6-6m-6 6l6 6"/>
+            </svg>
+            <span class="sr-only">Send</span>
+        </button>
+    </div>
+</div>
+
+<!-- Chat Toggle Icon (Fixed Bottom Right) -->
+<button class="fixed bottom-4 right-4 p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800 z-50" (click)="toggleChat()">
+    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+        <path d="M18 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3.546l3.2 3.659a1 1 0 0 0 1.506 0L13.454 14H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-8 10H5a1 1 0 0 1 0-2h5a1 1 0 1 1 0 2Zm5-4H5a1 1 0 0 1 0-2h10a1 1 0 1 1 0 2Z"/>
+    </svg>
+    <span class="sr-only">Chat with AI</span>
+</button>

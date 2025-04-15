@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f9fafb;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+tr:hover {
+  background-color: #f8fafc;
+}
+
+.loading-spinner {
+  border-top-color: #3b82f6;
+  border-bottom-color: #3b82f6;
+} 

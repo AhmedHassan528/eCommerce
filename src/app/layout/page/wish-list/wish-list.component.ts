@@ -7,11 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-wish-list',
-  standalone: true,
-  imports: [CurrencyPipe, RouterLink, TranslateModule],
-  templateUrl: './wish-list.component.html',
-  styleUrl: './wish-list.component.scss'
+    selector: 'app-wish-list',
+    imports: [CurrencyPipe, RouterLink, TranslateModule],
+    templateUrl: './wish-list.component.html',
+    styleUrl: './wish-list.component.scss'
 })
 export class WishListComponent implements OnInit, OnDestroy {
 
@@ -36,9 +35,10 @@ export class WishListComponent implements OnInit, OnDestroy {
   }
 
   getWishList(){
-    this.getWishListSub = this._wishListService.getWishList().subscribe({
+    this.getWishListSub = this._wishListService.getWishListProducts().subscribe({
       next: (res)=>{
-        this.GetWishListData = res.data;
+        this.GetWishListData = res.$values;
+        console.log( this.GetWishListData)
       },
       error: (err)=>{
         console.log(err);
@@ -46,7 +46,7 @@ export class WishListComponent implements OnInit, OnDestroy {
     })
   }
 
-  removeFromWishList(productId:string){
+  removeFromWishList(productId:number){
     this._wishListService.removeFromWishList(productId).subscribe({
       next: (res)=>{
         this.getWishList()

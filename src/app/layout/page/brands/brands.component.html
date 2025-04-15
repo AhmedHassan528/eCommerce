@@ -1,11 +1,11 @@
 <h1 class="text-5xl font-bold main-text-color text-center mt-4">{{"general.all brands" | translate }}</h1>
 <div #demo class="flex justify-center flex-wrap mb-10">
-    @for (brand of AllBrands; track brand._id) {
+    @for (brand of AllBrands; track brand.Id) {
 
-    <button class="rid grid-cols-4 gap-4 brand m-2" (click)="getBrandById(brand._id) ">
+    <button class="rid grid-cols-4 gap-4 brand m-2" (click)="getBrandById(brand.Id) ">
         <div class="col-span-1 pb-2 border-spacing-2 border-cyan-300">
-            <img src="{{brand.image}}" alt="{{brand.name}}" class="w-full h-48 object-cover">
-            <h2 class="text-2xl font-bold text-center ">{{brand.name}}</h2>
+            <img src="{{brand.Image}}" alt="{{brand.Name}}" class="w-full h-48 object-cover">
+            <h2 class="text-2xl font-bold text-center ">{{brand.Name}}</h2>
         </div>
     </button>
     }
@@ -19,7 +19,7 @@
 <!--Products by Brnad-->
 @if (AllProduct.length !== 0) {
 <section class=" md:grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 md:gap-4 ">
-    @for (item of AllProduct; track item._id) {
+    @for (item of AllProduct; track item.Id) {
         <app-product-card [product]="item"></app-product-card>
     }
 </section>

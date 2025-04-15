@@ -1,0 +1,83 @@
+<div class="confirmation-container">
+    <div class="confirmation-card">
+        @if (isConfirmed) {
+            <h2 class="success">✅ Email Confirmed</h2>
+        }
+        @if (!isConfirmed) {
+            <h2 class="error">❌ Email Confirmation Failed</h2>
+        }
+  
+      <p>{{ confirmationMessage }}</p>
+  
+      @if (isLoading) {
+        <div class="loading-spinner"></div>
+      }
+      @if (isConfirmed) {
+        <a href="/login" class="login-btn">Go to Login</a>
+      }
+    </div>
+  </div>
+  
+<style>
+    .confirmation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f9;
+}
+
+.confirmation-card {
+  text-align: center;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+}
+
+h2.success {
+  color: #28a745;
+}
+
+h2.error {
+  color: #dc3545;
+}
+
+p {
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.login-btn {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #0056b3;
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>

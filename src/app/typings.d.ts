@@ -1,0 +1,1 @@
+declare const Stripe: (publishableKey: string) => stripe.Stripe;

@@ -1,0 +1,104 @@
+<div class="flex">
+    <app-sidebar></app-sidebar>
+    <div class="flex-1 p-6">
+      <h1 class="text-3xl font-bold mb-6">Order Details</h1>
+      <div *ngIf="order" class="bg-white p-6 rounded-lg shadow">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">Order #{{ order.Id }}</h2>
+          <div class="flex space-x-2">
+            <button (click)="generatePDF()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+              Generate PDF
+            </button>
+            <button (click)="printOrder()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              Print
+            </button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p><strong>Customer:</strong> {{ order.CustomerName }}</p>
+            <p><strong>Total Amount:</strong> ${{ order.TotalAmount }}</p>
+            <p><strong>Status:</strong> {{ order.statusMess }} ({{ order.status ? 'Active' : 'Cancelled' }})</p>
+            <p><strong>Payment Method:</strong> {{ order.paymentMethodType }}</p>
+            <p><strong>Order Date:</strong> {{ order.OrderDate| date:'medium' }}</p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold">Address</h3>
+            <p><strong>Name:</strong> {{ order.AddressName }}</p>
+            <p><strong>City:</strong> {{ order.City }}</p>
+            <p><strong>Address:</strong> {{ order.Address }}</p>
+            <p><strong>Phone:</strong> {{ order.PhoneNumber }}</p>
+          </div>
+        </div>
+        
+        <!-- Tracking Information Section -->
+        <div class="mt-6 border-t pt-4">
+          <h3 class="text-lg font-semibold mb-3">Tracking Information</h3>
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p><strong>Tracking Number:</strong> {{ order.trackingNumber || 'Not assigned' }}</p>
+                <p><strong>Carrier:</strong> {{ order.carrier || 'Not assigned' }}</p>
+                <p><strong>Estimated Delivery:</strong> {{ order.estimatedDelivery ? (order.estimatedDelivery | date:'mediumDate') : 'Not available' }}</p>
+              </div>
+              <div>
+                <p><strong>Assigned To:</strong> {{ order.assignedTo || 'Not assigned' }}</p>
+                <p><strong>Last Updated:</strong> {{ order.lastTrackingUpdate ? (order.lastTrackingUpdate | date:'medium') : 'No updates' }}</p>
+                <p><strong>Current Location:</strong> {{ order.currentLocation || 'Unknown' }}</p>
+              </div>
+            </div>
+            
+            <!-- Tracking Notes -->
+            <div class="mt-3">
+              <h4 class="font-medium mb-2">Tracking Notes:</h4>
+              <div class="bg-white p-3 rounded border">
+                <p>{{ order.trackingNotes || 'No tracking notes available.' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <h3 class="text-lg font-semibold mt-6 mb-2">Items</h3>
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-gray-50 rounded-lg">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-4 py-2 text-left">Product</th>
+                <th class="px-4 py-2 text-left">Quantity</th>
+                <th class="px-4 py-2 text-left">Price</th>
+                <th class="px-4 py-2 text-left">Category</th>
+                <th class="px-4 py-2 text-left">Brand</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order.Items.$values" class="border-b">
+                <td class="px-4 py-2">
+                  <div class="flex items-center">
+                    <img [src]="item.ProductImage" alt="Product" class="w-10 h-10 mr-2 rounded" />
+                    {{ item.ProductName }}
+                  </div>
+                </td>
+                <td class="px-4 py-2">{{ item.Count }}</td>
+                <td class="px-4 py-2">${{ item.Price }}</td>
+                <td class="px-4 py-2">{{ item.Category}}</td>
+                <td class="px-4 py-2">{{ item.Brand }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-4 flex justify-between">
+          <a routerLink="/admin/orders" class="text-blue-600 hover:underline">Back to Orders</a>
+          <div class="text-sm text-gray-500">
+            <p>Document ID: {{ order.Id }}-{{ order.OrderDate | date:'yyyyMMdd' }}</p>
+            <p>Generated: {{ currentDate | date:'medium' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

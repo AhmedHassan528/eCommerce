@@ -3,17 +3,15 @@ import { BrandsService } from '../../../core/services/BrandsServices/brands.serv
 import { IBrands } from '../../../core/Interfaces/ibrands';
 import { ItemService } from '../../../core/services/Items-Service/item.service';
 import { IProduct } from '../../../core/Interfaces/product';
-import { KMPSearchPipe } from '../../../core/Pipes/kmpsearch.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductCardComponent } from "../../global/product-card/product-card.component";
 import { WishListService } from '../../../core/services/WishListServices/wish-list.service';
 
 @Component({
-  selector: 'app-brands',
-  standalone: true,
-  imports: [KMPSearchPipe, TranslateModule, ProductCardComponent],
-  templateUrl: './brands.component.html',
-  styleUrl: './brands.component.scss'
+    selector: 'app-brands',
+    imports: [TranslateModule, ProductCardComponent],
+    templateUrl: './brands.component.html',
+    styleUrl: './brands.component.scss'
 })
 export class BrandsComponent implements OnInit, OnDestroy {
 
@@ -65,7 +63,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
   getAllBrands() {
     this.getAllBrandsSub = this._brandsService.getAllBrands().subscribe({
       next: (response) => {
-        this.AllBrands = response.data;
+        this.AllBrands = response.$values;
         console.log(this.AllBrands);
       }
     })
@@ -84,11 +82,11 @@ export class BrandsComponent implements OnInit, OnDestroy {
 
 
   // Fetching all items by brand id
-  getItemsByBrandId(id: string) {
+  getItemsByBrandId(id: number) {
     this._itemService.getItems().subscribe({
       next: (response) => {
-        this.AllProduct = response.data.filter((item: IProduct) => {
-          return item.brand._id === id;
+        this.AllProduct = response.$values.filter((item: IProduct) => {
+          return item.Brand?.Id === id;
         })
         this.scrollToProduct();
       }
@@ -99,7 +97,8 @@ export class BrandsComponent implements OnInit, OnDestroy {
   getAllProducts() {
     this.getAllProductsSub = this._itemService.getItems().subscribe({
       next: (response) => {
-        this.AllProduct = response.data;
+        this.AllProduct = response.$values;
+        console.log(response.$values)
       }
     })
   }
@@ -107,9 +106,9 @@ export class BrandsComponent implements OnInit, OnDestroy {
   
   // get WishLists
   getWishList(): void {
-    this._wishListService.getWishList().subscribe({
+    this._wishListService.getWishListIDs().subscribe({
       next: (res) => {
-        this.WishListIDs = res.data.map((item: { _id: string; }) => item._id);;
+        this.WishListIDs = res.ProductsIDs.$values;
       }
     });
   }

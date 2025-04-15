@@ -4,9 +4,9 @@
             <!-- class=" lg:h-64 lg:w-40 md:h-40 h-20 w-full" -->
             <owl-carousel-o  [options]="customOptions">
     
-                @for (image of getDetails.images; track getDetails._id) {
+                @for (image of imageList; track getDetails.Id) {
                     <ng-template carouselSlide>
-                        <img [src]="image" [alt]="getDetails.title">
+                        <img [src]="image" [alt]="getDetails.Title">
                     </ng-template>
                 }
             
@@ -16,8 +16,8 @@
         <div class="md:p-0 md:col-span-7 col-span-12 p-10 content-center">
             <div class="flex justify-between ">
                 <div>
-                    <h1 class="mb-4 text-main text-2xl">{{getDetails.title}}</h1>
-                    <h3 class="mb-5 text-gray-500">{{getDetails.description}}</h3>
+                    <h1 class="mb-4 text-main text-2xl">{{getDetails.Title}}</h1>
+                    <h3 class="mb-5 text-gray-500">{{getDetails.Description}}</h3>
                 </div>
                 <div>
                     @if (wishListLoading !== true) {
@@ -39,16 +39,16 @@
 
             <button [routerLink]="['/brands']" class="mb-2 font-semibold">{{Brand}}</button>
             <div class="flex justify-between">
-                <p  class="text-lg">{{getDetails.price}}EGY</p>
+                <p  class="text-lg">{{getDetails.Price}}EGY</p>
 
                 <div>
-                    @for (item of [1,2,3,4,5].slice(0, getDetails.ratingsAverage); track $index) {
+                    @for (item of [1,2,3,4,5].slice(0, getDetails.RatingsQuantity); track $index) {
                     <fa-icon style="color: #FFD700;" [icon]="faStar"></fa-icon>
                     }
-                    @if (getDetails.ratingsAverage % 1 != 0) {
+                    @if (getDetails.RatingsQuantity % 1 != 0) {
                     <fa-icon style="color: #FFD700;" [icon]="faStarHalf"></fa-icon>
                     }
-                    {{getDetails.ratingsAverage}}
+                    {{getDetails.RatingsQuantity}}
                 </div>
             </div>
             <button [disabled]="AddingToCart" class="btn-main w-full" type="button" (click)="addToCart()">

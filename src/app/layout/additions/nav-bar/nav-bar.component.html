@@ -17,69 +17,59 @@
                 class="font-medium flex flex-col p-4 lg:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 lg:flex-row lg:space-x-3 rtl:space-x-reverse lg:mt-0 lg:border-0 lg:bg-white dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
                 <li>
                     <a routerLink="home" routerLinkActive="active-link" aria-current="page"
-                        class=" block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
-                        aria-current="page">
+                        class="nav-link block py-2 px-4 text-gray-900 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-green-100 hover:to-blue-100 hover:shadow-md active:scale-95 hover:animate-pulse">
                         <fa-icon class="lg:hidden" [icon]="faHouse"></fa-icon>
-
-                        {{"navBar.home" | translate}}</a>
+                        {{"navBar.home" | translate}}
+                    </a>
                 </li>
                 <li class="md:hidden">
                     <a routerLink="cart" routerLinkActive="active-link"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-700 md:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-white dark:hover:text-white lg:dark:hover:bg-transparent">
+                        class="nav-link block py-2 px-4 text-gray-900 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-green-100 hover:to-blue-100 hover:shadow-md active:scale-95 hover:animate-pulse">
                         <fa-icon class="lg:hidden" [icon]="faCartShopping"></fa-icon>
-                        {{"navBar.cart"
-                        | translate}}</a>
+                        {{"navBar.cart" | translate}}
+                    </a>
                 </li>
                 <li>
                     <a routerLink="address" routerLinkActive="active-link"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 md:hover:text-green-700 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent">
+                        class="nav-link block py-2 px-4 text-gray-900 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-green-100 hover:to-blue-100 hover:shadow-md active:scale-95 hover:animate-pulse">
                         <fa-icon class="lg:hidden" [icon]="faAddressBook"></fa-icon>
-
-                        {{"navBar.address"
-                        | translate}}</a>
+                        {{"navBar.address" | translate}}
+                    </a>
                 </li>
                 <li>
                     <a routerLink="products" routerLinkActive="active-link"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 md:hover:text-green-700 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent">
-
-                        {{"navBar.products"
-                        | translate}}</a>
+                        class="nav-link block py-2 px-4 text-gray-900 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-green-100 hover:to-blue-100 hover:shadow-md active:scale-95 hover:animate-pulse">
+                        {{"navBar.products" | translate}}
+                    </a>
                 </li>
                 <li>
                     <a routerLink="categories" routerLinkActive="active-link"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 md:hover:text-green-700 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent">
+                        class="nav-link block py-2 px-4 text-gray-900 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-green-100 hover:to-blue-100 hover:shadow-md active:scale-95 hover:animate-pulse">
                         <fa-icon class="lg:hidden" [icon]="faLayerGroup"></fa-icon>
-
-
-                        {{"navBar.categories"
-                        | translate}}</a>
+                        {{"navBar.categories" | translate}}
+                    </a>
                 </li>
                 <li>
                     <a routerLink="brands" routerLinkActive="active-link"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 md:hover:text-green-700 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent">
+                        class="nav-link block py-2 px-4 text-gray-900 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-green-100 hover:to-blue-100 hover:shadow-md active:scale-95 hover:animate-pulse">
                         <fa-icon class="lg:hidden" [icon]="faStore"></fa-icon>
-                        {{"navBar.brands"
-                        | translate}}</a>
+                        {{"navBar.brands" | translate}}
+                    </a>
                 </li>
                 <li>
                     <a routerLink="withList" routerLinkActive="active-link"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 md:hover:text-green-700 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent">
+                        class="nav-link block py-2 px-4 text-gray-900 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-green-100 hover:to-blue-100 hover:shadow-md active:scale-95 hover:animate-pulse">
                         <fa-icon class="lg:hidden" [icon]="faHeart"></fa-icon>
-
-                        {{"navBar.wishlist"
-                        | translate}}</a>
+                        {{"navBar.wishlist" | translate}}
+                    </a>
                 </li>
-                
                 <li>
                     <a routerLink="orderHistory" routerLinkActive="active-link"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 md:hover:text-green-700 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent">
+                        class="nav-link block py-2 px-4 text-gray-900 rounded-lg transition-all duration-300 hover:bg-gradient-to-r hover:from-green-100 hover:to-blue-100 hover:shadow-md active:scale-95 hover:animate-pulse">
                         <fa-icon class="lg:hidden" [icon]="faBagShopping"></fa-icon>
-
-                        {{"navBar.orderHistory"
-                        | translate}}</a>
+                        {{"navBar.orderHistory" | translate}}
+                    </a>
                 </li>
-
-
 
                 @if (Logged) {
                 <li class="lg:hidden">
@@ -100,9 +90,7 @@
                 </li>
                 }
 
-
                 <li class="lg:hidden mt-3">
-
                     <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName2"
                         class="flex items-center text-sm pe-1 font-medium text-gray-900 rounded-full hover:text-blue-600 dark:hover:text-blue-500 md:me-0 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-white"
                         type="button">
@@ -133,8 +121,6 @@
                     </div>
 
                 </li>
-
-
 
             </ul>
 
@@ -187,12 +173,13 @@
                     <a><fa-icon [icon]="faTiktok"></fa-icon></a>
                 </li>
                 <li>
-                    <a routerLink="cart" class="relative">
-                        <fa-icon size="2xl" [icon]="faCartShopping"></fa-icon>
-                        <span style="top: -12px; right: 0px;"
-                            class=" absolute bg-green-100 text-green-800 text-xs font-medium me-2 px-1 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
-                        {{CartCount}}
+                    <a routerLink="cart" class="relative group">
+                        <fa-icon size="2xl" [icon]="faCartShopping" class="transform group-hover:scale-110 transition-transform duration-300"></fa-icon>
+                        @if (CartCount > 0) {
+                        <span class="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-medium px-2 py-1 rounded-full animate-bounce">
+                            {{CartCount}}
                         </span>
+                        }
                     </a>
                 </li>
 
@@ -221,3 +208,130 @@
         </div>
     </div>
 </nav>
+
+<style>
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+
+    .animate-bounce {
+        animation: bounce 1s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4);
+        }
+        50% {
+            transform: scale(1.03);
+            box-shadow: 0 0 0 10px rgba(74, 222, 128, 0);
+        }
+    }
+
+    .animate-pulse {
+        animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes shine {
+        0% {
+            background-position: -100% 0;
+        }
+        100% {
+            background-position: 200% 0;
+        }
+    }
+
+    .nav-link {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, #4ade80, #3b82f6);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: -1;
+    }
+
+    .nav-link:hover::before {
+        opacity: 0.1;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+        transition: 0.5s;
+    }
+
+    .nav-link:hover::after {
+        left: 100%;
+    }
+
+    .active-link {
+        background: linear-gradient(to right, rgba(74, 222, 128, 0.1), rgba(59, 130, 246, 0.1));
+        color: #059669;
+        font-weight: 500;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .active-link::before {
+        opacity: 0.15;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    .animate-float {
+        animation: float 2s ease-in-out infinite;
+    }
+
+    #navbar-default {
+        animation: slideDown 0.3s ease-out;
+    }
+
+    .border-gradient-to-r {
+        border-image: linear-gradient(to right, #4ade80, #3b82f6) 1;
+    }
+</style>

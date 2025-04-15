@@ -1,42 +1,31 @@
-export interface IProductDetails {
-    sold: number
-    images: string[]
-    subcategory: Subcategory[]
+export interface IProduct {
+    Id: number
+    numSold: number
     ratingsQuantity: number
-    _id: string
     title: string
-    slug: string
     description: string
     quantity: number
     price: number
     imageCover: string
+    images: string
+    categoryID: number
     category: Category
+    brandID: number
     brand: Brand
-    ratingsAverage: number
-    createdAt: string
-    updatedAt: string
-    __v: number
-    reviews: any[]
-    id: string
-}
-
-export interface Subcategory {
-    _id: string
-    name: string
-    slug: string
-    category: string
 }
 
 export interface Category {
-    _id: string
-    name: string
-    slug: string
-    image: string
+    id?: number
+    name?: string
+    image?: string
+    tenantId?: string
 }
 
 export interface Brand {
-    _id: string
-    name: string
-    slug: string
-    image: string
+    $id?: string
+    id?: number
+    name?: string
+    image?: string
+    tenantId?: string
 }
+

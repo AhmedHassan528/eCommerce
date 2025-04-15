@@ -111,5 +111,150 @@
         "Delivered" : "Delivered",
         "Not Delivered" : "Not Delivered"
 
+    },
+    "admin": {
+        "dashboard": {
+            "title": "Dashboard",
+            "totalOrders": "Total Orders",
+            "categories": "Categories",
+            "brands": "Brands"
+        },
+        "categories": {
+            "title": "Categories",
+            "createCategory": "Create Category",
+            "table": {
+                "id": "ID",
+                "name": "Name",
+                "image": "Image",
+                "actions": "Actions"
+            },
+            "actions": {
+                "edit": "Edit",
+                "delete": "Delete"
+            },
+            "modal": {
+                "createTitle": "Create Category",
+                "editTitle": "Edit Category"
+            },
+            "form": {
+                "name": "Name",
+                "image": "Category Image",
+                "imageRequired": "An image is required for the category",
+                "cancel": "Cancel",
+                "create": "Create",
+                "update": "Update"
+            },
+            "validation": {
+                "nameRequired": "Name is required and cannot exceed 50 characters"
+            }
+        },
+        "brands": {
+            "title": "Brands",
+            "createBrand": "Create Brand",
+            "table": {
+                "id": "ID",
+                "name": "Name",
+                "image": "Image",
+                "actions": "Actions"
+            },
+            "actions": {
+                "edit": "Edit",
+                "delete": "Delete"
+            },
+            "modal": {
+                "createTitle": "Create Brand",
+                "editTitle": "Edit Brand"
+            },
+            "form": {
+                "name": "Name",
+                "image": "Brand Image",
+                "imageRequired": "An image is required for the brand",
+                "cancel": "Cancel",
+                "create": "Create",
+                "update": "Update"
+            },
+            "validation": {
+                "nameRequired": "Name is required and cannot exceed 100 characters"
+            }
+        },
+        "products": {
+            "title": "Products",
+            "createProduct": "Create Product",
+            "searchPlaceholder": "Search by product title...",
+            "table": {
+                "id": "ID",
+                "title": "Title",
+                "description": "Description",
+                "price": "Price",
+                "numSold": "Num Sold",
+                "ratings": "Ratings",
+                "viewCount": "View Count",
+                "category": "Category",
+                "brand": "Brand",
+                "actions": "Actions"
+            },
+            "actions": {
+                "edit": "Edit",
+                "delete": "Delete"
+            },
+            "modal": {
+                "createTitle": "Create Product",
+                "editTitle": "Edit Product"
+            },
+            "form": {
+                "title": "Title",
+                "description": "Description",
+                "price": "Price",
+                "numSold": "Number Sold",
+                "ratingsQuantity": "Ratings Quantity",
+                "category": "Category",
+                "brand": "Brand",
+                "selectCategory": "Select a category",
+                "selectBrand": "Select a brand",
+                "coverImage": "Cover Image",
+                "additionalImages": "Additional Images",
+                "imageRequired": "At least one image is required",
+                "optionalImages": "Optional - you can upload multiple images",
+                "cancel": "Cancel",
+                "create": "Create",
+                "update": "Update"
+            },
+            "validation": {
+                "titleRequired": "Title is required and cannot exceed 50 characters",
+                "descriptionRequired": "Description is required and cannot exceed 500 characters",
+                "priceRequired": "Price is required and must be greater than 0",
+                "numSoldRequired": "Number sold is required and must be greater than 0",
+                "ratingsQuantityRequired": "Ratings quantity is required and must be greater than 0"
+            }
+        },
+        "users": {
+            "title": "Users",
+            "searchPlaceholder": "Search by name, email or phone...",
+            "noUsers": "No users found",
+            "error": "Failed to load users",
+            "filter": {
+                "allRoles": "All Roles",
+                "admin": "Admin",
+                "user": "User"
+            },
+            "table": {
+                "id": "ID",
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "email": "Email",
+                "phone": "Phone Number",
+                "roles": "Roles"
+            }
+        },
+        "makeAdmin": {
+            "title": "Make User Admin",
+            "userEmail": "User Email",
+            "emailPlaceholder": "Enter user email",
+            "emailRequired": "Email is required",
+            "invalidEmail": "Please enter a valid email",
+            "makeAdmin": "Make Admin",
+            "success": "User has been made admin successfully",
+            "error": "Failed to make user admin"
+        }
     }
 }

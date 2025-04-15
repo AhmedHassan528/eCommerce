@@ -1,0 +1,168 @@
+<div class="flex">
+  <app-sidebar></app-sidebar>
+  <div class="flex-1 p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold">{{ 'admin.products.title' | translate }}</h1>
+      <button (click)="onCreate()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        {{ 'admin.products.createProduct' | translate }}
+      </button>
+    </div>
+
+    <!-- Search Input -->
+    <div class="max-w-md mb-6">
+      <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+          </svg>
+        </div>
+        <input [(ngModel)]="searchTerm" type="search" id="default-search"
+          class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-400 focus:border-blue-700"
+          [placeholder]="'admin.products.searchPlaceholder' | translate" required />
+      </div>
+    </div>
+
+    <!-- Products Table -->
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+      <table class="min-w-full">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-6 py-3 text-left">{{ 'admin.products.table.id' | translate }}</th>
+            <th class="px-6 py-3 text-left">{{ 'admin.products.table.title' | translate }}</th>
+            <th class="px-6 py-3 text-left">{{ 'admin.products.table.description' | translate }}</th>
+            <th class="px-6 py-3 text-left">{{ 'admin.products.table.price' | translate }}</th>
+            <th class="px-6 py-3 text-left">{{ 'admin.products.table.numSold' | translate }}</th>
+            <th class="px-6 py-3 text-left">{{ 'admin.products.table.ratings' | translate }}</th>
+            <th class="px-6 py-3 text-left">{{ 'admin.products.table.viewCount' | translate }}</th>
+            <th class="px-6 py-3 text-left">{{ 'admin.products.table.category' | translate }}</th>
+            <th class="px-6 py-3 text-left">{{ 'admin.products.table.brand' | translate }}</th>
+            <th class="px-6 py-3 text-left">{{ 'admin.products.table.actions' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products | kMPSearch: searchTerm" class="border-b">
+            <td class="px-6 py-4">{{ product.Id }}</td>
+            <td class="px-6 py-4">{{ product.Title }}</td>
+            <td class="px-6 py-4">{{ product.Description | slice:0:50 }}...</td>
+            <td class="px-6 py-4">{{ product.Price | currency }}</td>
+            <td class="px-6 py-4">{{ product.NumSold }}</td>
+            <td class="px-6 py-4">{{ product.RatingsQuantity }}</td>
+            <td class="px-6 py-4">{{ product.ViewCount }}</td>
+            <td class="px-6 py-4">{{ product.Category.Name || 'N/A' }}</td>
+            <td class="px-6 py-4">{{ product.Brand.Name || 'N/A' }}</td>
+            <td class="px-6 py-4">
+              <button (click)="onEdit(product)" class="text-blue-600 hover:underline mr-2">{{ 'admin.products.actions.edit' | translate }}</button>
+              <button (click)="onDelete(product.Id)" class="text-red-600 hover:underline">{{ 'admin.products.actions.delete' | translate }}</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Create/Edit Modal -->
+    <div #crudModal class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full">
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+          <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">
+            {{ isEditMode ? ('admin.products.modal.editTitle' | translate) : ('admin.products.modal.createTitle' | translate) }}
+          </h3>
+          <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
+            <!-- Title -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">{{ 'admin.products.form.title' | translate }}</label>
+              <input type="text" formControlName="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+              <div *ngIf="productForm.get('title')?.invalid && productForm.get('title')?.touched" class="text-red-500 text-sm">
+                {{ 'admin.products.validation.titleRequired' | translate }}
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">{{ 'admin.products.form.description' | translate }}</label>
+              <textarea formControlName="description" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+              <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="text-red-500 text-sm">
+                {{ 'admin.products.validation.descriptionRequired' | translate }}
+              </div>
+            </div>
+
+            <!-- Price -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">{{ 'admin.products.form.price' | translate }}</label>
+              <input type="number" formControlName="price" min="0" step="0.01" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+              <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-red-500 text-sm">
+                {{ 'admin.products.validation.priceRequired' | translate }}
+              </div>
+            </div>
+
+            <!-- NumSold -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">{{ 'admin.products.form.numSold' | translate }}</label>
+              <input type="number" formControlName="NumSold" min="0" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+              <div *ngIf="productForm.get('NumSold')?.invalid && productForm.get('NumSold')?.touched" class="text-red-500 text-sm">
+                {{ 'admin.products.validation.numSoldRequired' | translate }}
+              </div>
+            </div>
+
+            <!-- Ratings Quantity -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">{{ 'admin.products.form.ratingsQuantity' | translate }}</label>
+              <input type="number" formControlName="ratingsQuantity" min="0" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+              <div *ngIf="productForm.get('ratingsQuantity')?.invalid && productForm.get('ratingsQuantity')?.touched" class="text-red-500 text-sm">
+                {{ 'admin.products.validation.ratingsQuantityRequired' | translate }}
+              </div>
+            </div>
+
+            <!-- Category -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">{{ 'admin.products.form.category' | translate }}</label>
+              <select formControlName="category" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <option [ngValue]="null">{{ 'admin.products.form.selectCategory' | translate }}</option>
+                <option *ngFor="let category of categories" [ngValue]="category.Id">
+                  {{ category.Name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Brand -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">{{ 'admin.products.form.brand' | translate }}</label>
+              <select formControlName="Brand" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <option [ngValue]="null">{{ 'admin.products.form.selectBrand' | translate }}</option>
+                <option *ngFor="let brand of brands" [ngValue]="brand.Id">
+                  {{ brand.Name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Cover Image -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">{{ 'admin.products.form.coverImage' | translate }} <span class="text-red-500">*</span></label>
+              <input type="file" (change)="onCoverImageChange($event)" accept="image/*" class="mt-1 block w-full">
+              <div *ngIf="imageError" class="text-red-500 text-sm">{{ imageError }}</div>
+              <p class="text-xs text-gray-500 mt-1">{{ 'admin.products.form.imageRequired' | translate }}</p>
+            </div>
+
+            <!-- Additional Images -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700">{{ 'admin.products.form.additionalImages' | translate }}</label>
+              <input type="file" (change)="onImageChange($event)" accept="image/*" multiple class="mt-1 block w-full">
+              <p class="text-xs text-gray-500 mt-1">{{ 'admin.products.form.optionalImages' | translate }}</p>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex justify-end space-x-3 mt-4">
+              <button type="button" (click)="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">
+                {{ 'admin.products.form.cancel' | translate }}
+              </button>
+              <button type="submit" [disabled]="!productForm.valid || imageError" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50">
+                {{ isEditMode ? ('admin.products.form.update' | translate) : ('admin.products.form.create' | translate) }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

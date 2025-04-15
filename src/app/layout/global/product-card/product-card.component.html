@@ -1,62 +1,55 @@
 <div>
-    <div class=" h-auto card-Product product md:col-span-1 col-span-12 my-3 relative">
-        <div class=" p-2 md:block flex  justify-between">
-            <img [routerLink]="['/Details', product._id]" src="{{product.imageCover}}" class="md:w-full w-1/3 max-h-64">
-            <div class="md:flex">
-                <div [routerLink]="['/Details', product._id]" class="md:ml-0 md:w-full md:content-stretch ml-2 w-2/3 ">
-                    <p class="text-xs main-text-color">{{product.category.name | lowercase }}</p>
-                    <p class="md:text-sm xl:text-md">{{product.title | termtext : 2 | titlecase}} ...</p>
-                </div>
-                <div class=" md:static absolute right-3 top-3">
-                    @if (WishListIDs?.includes(product._id)) {
-
+    <div class="h-[450px] w-full card-Product product md:col-span-1 col-span-12 my-3 relative flex flex-col">
+        <div class="p-4 flex flex-col h-full">
+            <div class="relative h-48 mb-4">
+                <img [routerLink]="['/Details', product.Id]" [src]="product.ImageCover" class="w-full h-full object-cover rounded-lg">
+                <div class="absolute top-2 right-2">
+                    @if (WishListIDs?.includes(product.Id)) {
                         @if (wishListLoading === true) {
                             <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon>
-                            }@else {
-                                <button (click)="removeFromWishList(product._id)">
-                                    <fa-icon size="xl" [icon]="faHeart" style="color:red;"></fa-icon>
-                                </button>
-                            }
+                        }@else {
+                            <button (click)="removeFromWishList(product.Id)">
+                                <fa-icon size="xl" [icon]="faHeart" style="color:red;"></fa-icon>
+                            </button>
+                        }
                     }@else {
                         @if (wishListLoading === true) {
-                        <fa-icon style="color: red;" [icon]="faSpinner" [spin]="true"></fa-icon>
+                            <fa-icon style="color: red;" [icon]="faSpinner" [spin]="true"></fa-icon>
                         }@else {
-                        <button (click)="addToWishList(product._id)">
-                            <fa-icon size="xl" [icon]="faHeart"></fa-icon>
-                        </button>
+                            <button (click)="addToWishList(product.Id)">
+                                <fa-icon size="xl" [icon]="faHeart"></fa-icon>
+                            </button>
+                        }
                     }
-
-                    }
-
                 </div>
             </div>
-
-            <div [routerLink]="['/Details', product._id]" class="md:justify-between md:content-center content-center ">
-                <div class="2xl:mt-0 2xl:block md:mt-4 md:min-w-0 min-w-32">
+            
+            <div [routerLink]="['/Details', product.Id]" class="flex-grow">
+                <p class="text-xs main-text-color mb-1">{{product.CategoryName | lowercase }}</p>
+                <p class="text-sm font-medium mb-2 line-clamp-2">{{product.Title | termtext : 2 | titlecase}} ...</p>
+                
+                <div class="flex items-center mb-2">
                     @for (item of [1,2,3,4,5].slice(0, product.ratingsAverage); track $index) {
-                    <fa-icon size="sm" style="color: #FFD700;" [icon]="faStar"></fa-icon>
+                        <fa-icon size="sm" style="color: #FFD700;" [icon]="faStar"></fa-icon>
                     }
                     @if (product.ratingsAverage % 1 != 0) {
-                    <fa-icon size="sm" style="color: #FFD700;" [icon]="faStarHalf"></fa-icon>
+                        <fa-icon size="sm" style="color: #FFD700;" [icon]="faStarHalf"></fa-icon>
                     }
-                    {{product.ratingsAverage}}
+                    <span class="ml-1 text-sm">{{product.ratingsAverage}}</span>
                 </div>
-                <span class=" xl:text-lg md:text-sm md:w-auto">
-                    {{product.price | currency: 'EGP'}}
-                </span>
-
+                
+                <p class="text-lg font-semibold mb-4">{{product.Price | currency: 'EGP'}}</p>
             </div>
-        </div>
-        <div class="md:static md:flex md:justify-center absolute bottom-2 right-40 ">
-            <button [disabled]="AddLoading == true " (click)="addToCart(product._id)" type="button"
-                class=" btn-main slide-in-right">
-                @if (AddLoading == true && itemId == product._id) {
-                <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon>
-                {{"product.add to cart" | translate }}
-                }@else {
-                {{"product.add to cart" | translate }}
-                }
-            </button>
+            
+            <div class="mt-auto">
+                <button [disabled]="AddLoading == true" (click)="addToCart(product.Id)" type="button"
+                    class="btn-main w-full flex items-center justify-center">
+                    @if (AddLoading == true && itemId == product.Id) {
+                        <fa-icon [icon]="faSpinner" [spin]="true" class="mr-2"></fa-icon>
+                    }
+                    {{"product.add to cart" | translate }}
+                </button>
+            </div>
         </div>
     </div>
 </div>

@@ -1,13 +1,13 @@
 <h1 class="text-5xl font-bold main-text-color text-center mt-4">{{"general.all categories" | translate}}</h1>
 <br>
 <div class="flex justify-center flex-wrap mb-10">
-    @for (item of CategoriesData; track item._id) {
+    @for (item of CategoriesData; track item.Id) {
 
     <div class="w-1/4 brand m-4">
         <div>
-            <img class="aspect-square w-96 object-cover"   src="{{item.image}}" alt="{{item.name}}">
+            <img class="aspect-square w-96 object-cover"   src="{{item.Image}}" alt="{{item.Name}}">
         </div>
-        <h1 class="text-2xl font-bold main-text-color text-center my-4">{{item.name}}</h1>
+        <h1 class="text-2xl font-bold main-text-color text-center my-4">{{item.Name}}</h1>
     </div>
     }
 </div>

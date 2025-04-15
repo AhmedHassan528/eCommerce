@@ -1,7 +1,8 @@
 export interface IAddress {
-    _id: string
-    name: string
-    details: string
-    phone: string
-    city: string
+    $id: string
+    Id: number
+    AddressName: string
+    City: string
+    Address: string
+    phoneNumber: string
 }

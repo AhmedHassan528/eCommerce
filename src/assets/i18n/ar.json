@@ -111,5 +111,150 @@
             "Total Price": "السعر الإجمالي",
             "Delivered" : "تم التوصيل",
             "Not Delivered" : "لم يتم التوصيل"
+        },
+    "admin": {
+        "dashboard": {
+            "title": "لوحة التحكم",
+            "totalOrders": "إجمالي الطلبات",
+            "categories": "الفئات",
+            "brands": "العلامات التجارية"
+        },
+        "categories": {
+            "title": "الفئات",
+            "createCategory": "إنشاء فئة",
+            "table": {
+                "id": "المعرف",
+                "name": "الاسم",
+                "image": "الصورة",
+                "actions": "الإجراءات"
+            },
+            "actions": {
+                "edit": "تعديل",
+                "delete": "حذف"
+            },
+            "modal": {
+                "createTitle": "إنشاء فئة",
+                "editTitle": "تعديل فئة"
+            },
+            "form": {
+                "name": "الاسم",
+                "image": "صورة الفئة",
+                "imageRequired": "مطلوب صورة للفئة",
+                "cancel": "إلغاء",
+                "create": "إنشاء",
+                "update": "تحديث"
+            },
+            "validation": {
+                "nameRequired": "الاسم مطلوب ولا يمكن أن يتجاوز 50 حرفاً"
+            }
+        },
+        "brands": {
+            "title": "العلامات التجارية",
+            "createBrand": "إنشاء علامة تجارية",
+            "table": {
+                "id": "المعرف",
+                "name": "الاسم",
+                "image": "الصورة",
+                "actions": "الإجراءات"
+            },
+            "actions": {
+                "edit": "تعديل",
+                "delete": "حذف"
+            },
+            "modal": {
+                "createTitle": "إنشاء علامة تجارية",
+                "editTitle": "تعديل علامة تجارية"
+            },
+            "form": {
+                "name": "الاسم",
+                "image": "صورة العلامة التجارية",
+                "imageRequired": "مطلوب صورة للعلامة التجارية",
+                "cancel": "إلغاء",
+                "create": "إنشاء",
+                "update": "تحديث"
+            },
+            "validation": {
+                "nameRequired": "الاسم مطلوب ولا يمكن أن يتجاوز 100 حرف"
+            }
+        },
+        "products": {
+            "title": "المنتجات",
+            "createProduct": "إنشاء منتج",
+            "searchPlaceholder": "البحث عن طريق عنوان المنتج...",
+            "table": {
+                "id": "المعرف",
+                "title": "العنوان",
+                "description": "الوصف",
+                "price": "السعر",
+                "numSold": "عدد المبيعات",
+                "ratings": "التقييمات",
+                "viewCount": "عدد المشاهدات",
+                "category": "الفئة",
+                "brand": "العلامة التجارية",
+                "actions": "الإجراءات"
+            },
+            "actions": {
+                "edit": "تعديل",
+                "delete": "حذف"
+            },
+            "modal": {
+                "createTitle": "إنشاء منتج",
+                "editTitle": "تعديل منتج"
+            },
+            "form": {
+                "title": "العنوان",
+                "description": "الوصف",
+                "price": "السعر",
+                "numSold": "عدد المبيعات",
+                "ratingsQuantity": "عدد التقييمات",
+                "category": "الفئة",
+                "brand": "العلامة التجارية",
+                "selectCategory": "اختر فئة",
+                "selectBrand": "اختر علامة تجارية",
+                "coverImage": "صورة الغلاف",
+                "additionalImages": "صور إضافية",
+                "imageRequired": "مطلوب صورة واحدة على الأقل",
+                "optionalImages": "اختياري - يمكنك رفع صور متعددة",
+                "cancel": "إلغاء",
+                "create": "إنشاء",
+                "update": "تحديث"
+            },
+            "validation": {
+                "titleRequired": "العنوان مطلوب ولا يمكن أن يتجاوز 50 حرفاً",
+                "descriptionRequired": "الوصف مطلوب ولا يمكن أن يتجاوز 500 حرف",
+                "priceRequired": "السعر مطلوب ويجب أن يكون أكبر من 0",
+                "numSoldRequired": "عدد المبيعات مطلوب ويجب أن يكون أكبر من 0",
+                "ratingsQuantityRequired": "عدد التقييمات مطلوب ويجب أن يكون أكبر من 0"
+            }
+        },
+        "users": {
+            "title": "المستخدمين",
+            "searchPlaceholder": "البحث بالاسم أو البريد الإلكتروني أو الهاتف...",
+            "noUsers": "لم يتم العثور على مستخدمين",
+            "error": "فشل في تحميل المستخدمين",
+            "filter": {
+                "allRoles": "جميع الأدوار",
+                "admin": "مسؤول",
+                "user": "مستخدم"
+            },
+            "table": {
+                "id": "المعرف",
+                "firstName": "الاسم الأول",
+                "lastName": "الاسم الأخير",
+                "email": "البريد الإلكتروني",
+                "phone": "رقم الهاتف",
+                "roles": "الأدوار"
+            }
+        },
+        "makeAdmin": {
+            "title": "جعل المستخدم مسؤولاً",
+            "userEmail": "البريد الإلكتروني للمستخدم",
+            "emailPlaceholder": "أدخل البريد الإلكتروني للمستخدم",
+            "emailRequired": "البريد الإلكتروني مطلوب",
+            "invalidEmail": "يرجى إدخال بريد إلكتروني صالح",
+            "makeAdmin": "جعل مسؤولاً",
+            "success": "تم جعل المستخدم مسؤولاً بنجاح",
+            "error": "فشل في جعل المستخدم مسؤولاً"
         }
+    }
 }

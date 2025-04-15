@@ -1,20 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { faTrash, faPlus, faMinus, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { CartService } from '../../../core/services/CartServices/cart.service';
 import { ICart } from '../../../core/Interfaces/icart';
 import { CurrencyPipe } from '@angular/common';
-import { TermtextPipe } from '../../../core/Pipes/termtext.pipe';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-cart',
-  standalone: true,
-  imports: [CurrencyPipe, TranslateModule,FontAwesomeModule, TermtextPipe, RouterLink],
-  templateUrl: './cart.component.html',
-  styleUrl: './cart.component.scss'
+    selector: 'app-cart',
+    standalone: true,
+    imports: [CurrencyPipe, TranslateModule, FontAwesomeModule, RouterLink],
+    templateUrl: './cart.component.html',
+    styleUrl: './cart.component.scss',
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CartComponent implements OnInit, OnDestroy {
 typeof: any;
@@ -23,7 +22,7 @@ typeof: any;
   // varibles ( loading handelers )
   qtyLoading: boolean = false
   DeleteLoading: boolean = false;
-  cartId: string = '';
+  cartId: number = 0;
 
 
 
@@ -46,6 +45,7 @@ typeof: any;
   // component life cycle
   ngOnInit() {
     this.getCartItems();
+
   }
   ngOnDestroy(): void {
     this.getCartItembSub?.unsubscribe();
@@ -57,27 +57,25 @@ typeof: any;
   getCartItems() {
     this.getCartItembSub = this._cartService.getCartItems().subscribe({
       next: (response) => {
-        this.cartItems = response.data;
+        this.cartItems = response;
       }
     });
   }
 
   // Remove specific  Item
-  DeletespecificItem(id:string): void {
+  DeletespecificItem(id:number): void {
     this.DeleteLoading = true;
     this.cartId = id;
 
     this.getDeletespecificItemSub = this._cartService.deleteCartItem(id).subscribe({
       next: (res) => {
-        this.cartItems = res.data;
         this.DeleteLoading = false;
-        this.cartId = '';
-
-        this.countOfCart(res.data.products.length);
+        this.cartId = 0;
+        this.getCartItems();
       },
       error: () => {
         this.DeleteLoading = false;
-        this.cartId = '';
+        this.cartId = 0;
 
       }
     })
@@ -88,35 +86,46 @@ typeof: any;
     this.getDeletespecificItemSub = this._cartService.ClearCar().subscribe({
       next: (res) => {
         this.countOfCart(0);
-        this.cartItems.products = [];
-        this.cartItems.totalCartPrice = 0;
+        this.cartItems.Products.$values = [];
+        this.cartItems.TotalCartPrice = 0;
       }
     })
   }
 
   // Edit Cart QTY
 
-  EditQuantity(id:string, QTY:number, plus:boolean): void {
+  EditQuantity(id:number, plus:boolean): void {
     this.cartId = id;
     this.qtyLoading = true;
     if(plus==true){
-      QTY +=1
+      this.getDeletespecificItemSub = this._cartService.IncreaseItemCount(id).subscribe({
+        next: () => {
+          this.getCartItems()
+          this.qtyLoading = false
+          this.cartId = 0;
+  
+        },
+        error: () => {
+          this.qtyLoading = false
+          this.cartId = 0;
+        }
+      })
     }else{
-      QTY -= 1
+      this.getDeletespecificItemSub = this._cartService.DecreaseItemCount(id).subscribe({
+        next: (res) => {
+          this.getCartItems()
+          this.qtyLoading = false
+          this.cartId = 0;
+        },
+        error: () => {
+          this.qtyLoading = false
+          this.cartId = 0;
+        }
+      })
     }
-    this.getDeletespecificItemSub = this._cartService.EditQuantity(id, QTY).subscribe({
-      next: (res) => {
-        this.cartItems = res.data;
-        this.qtyLoading = false
-        this.cartId = '';
-
-      },
-      error: () => {
-        this.qtyLoading = false
-        this.cartId = '';
-      }
-    })
+    
   }
+
 
   // Check Out
   CheckOut(id:string): void {

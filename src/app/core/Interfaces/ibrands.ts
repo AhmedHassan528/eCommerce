@@ -1,8 +1,5 @@
 export interface IBrands {
-    _id: string
-    name: string
-    slug: string
-    image: string
-    createdAt: string
-    updatedAt: string
+    Id: number
+    Name: string
+    Image: string
 }
