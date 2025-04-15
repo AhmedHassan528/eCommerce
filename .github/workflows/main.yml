@@ -9,38 +9,36 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18.x'
-        
+
     - name: Install dependencies
       run: npm ci
-      
-    - name: Run tests
-      run: npm test
+
+    - name: Install Google Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libappindicator1 fonts-liberation
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo dpkg -i google-chrome*.deb || sudo apt-get -f install -y
+
+    - name: Run tests (Headless Chrome)
+      run: npm test -- --watch=false --browsers=ChromeHeadlessCI
       env:
         CHROME_BIN: /usr/bin/google-chrome
-        DISPLAY: :99
-      before_script:
-        - sudo apt-get update
-        - sudo apt-get install -y libappindicator1 fonts-liberation
-        - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        - sudo dpkg -i google-chrome*.deb
-        - export DISPLAY=:99.0
-        - sh -e /etc/init.d/xvfb start
-        - sleep 3
-        
+
     - name: Build
       run: npm run build -- --configuration production
-      
+
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'your-app-name'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: 'dist/ecommerce' 
+        package: 'dist/ecommerce'
