@@ -16,5 +16,5 @@ import { pageTransition, fadeIn } from './shared/animations/animations';
     animations: [pageTransition, fadeIn]
 })
 export class AppComponent {
-  
+  title = 'Ecommerce';
 }
