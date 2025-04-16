@@ -45,7 +45,9 @@ export class OrderHistoryComponent {
   getOrders(): void {
     this._orders.getOrders().subscribe({
       next: (data) => {
-        this.orders = data.$values;
+        this.orders = data.$values.sort((a: IorderHostory, b: IorderHostory) => {
+          return new Date(b.OrderDate).getTime() - new Date(a.OrderDate).getTime();
+        });
         console.log(this.orders);
         console.log(data);
       },

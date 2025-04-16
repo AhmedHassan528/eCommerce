@@ -43,7 +43,20 @@
         "delete": "Delete",
         "add address": "Add Address",
         "use this address": "Use This Address",
-        "Close modal": "Close Modal"
+        "Close modal": "Close Modal",
+        "Add New Address": "Add New Address",
+        "validation": {
+            "name_required": "Name is required",
+            "name_min_length": "Name must be at least 3 characters",
+            "name_pattern": "Name can only contain letters and spaces",
+            "address_required": "Address is required",
+            "address_min_length": "Address must be at least 5 characters",
+            "phone_required": "Phone number is required",
+            "phone_pattern": "Phone number must be 10-15 digits",
+            "city_required": "City is required",
+            "city_min_length": "City must be at least 2 characters",
+            "city_pattern": "City can only contain letters and spaces"
+        }
     },
     "wishlist": {
         "wishlist": "Wishlist",
@@ -109,8 +122,10 @@
         "Payment Is Not Paid" : "Payment Is Not Paid",
         "Total Price" : "Total Price",
         "Delivered" : "Delivered",
-        "Not Delivered" : "Not Delivered"
-
+        "Not Delivered" : "Not Delivered",
+        "Pending" : "Pending",
+        "Received" : "Received",
+        "Canceled" : "Canceled"
     },
     "admin": {
         "dashboard": {

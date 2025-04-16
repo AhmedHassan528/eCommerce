@@ -4,15 +4,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { KMPSearchPipe } from '../../../core/Pipes/kmpsearch.pipe';
 import { FormsModule } from '@angular/forms';
-import { SucceedComponent } from "../../additions/Errors/succeed/succeed.component";
-import { ErrorComponent } from "../../additions/Errors/error/error.component";
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductCardComponent } from "../../global/product-card/product-card.component";
 import { WishListService } from '../../../core/services/WishListServices/wish-list.service';
 
 @Component({
     selector: 'app-products',
-    imports: [TranslateModule, FormsModule, KMPSearchPipe, SucceedComponent, ErrorComponent, ProductCardComponent],
+    imports: [TranslateModule, FormsModule, KMPSearchPipe, ProductCardComponent],
     templateUrl: './products.component.html',
     styleUrl: './products.component.scss'
 })

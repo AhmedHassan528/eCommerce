@@ -9,10 +9,11 @@ import { OrdersService } from '../../../core/services/OrdersServices/orders.serv
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentService } from '../../../core/services/PaymentServices/payment.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-addresses',
-    imports: [ReactiveFormsModule, TranslateModule, FontAwesomeModule],
+    imports: [ReactiveFormsModule, TranslateModule, FontAwesomeModule, CommonModule],
     templateUrl: './addresses.component.html',
     styleUrl: './addresses.component.scss'
 })
@@ -62,18 +63,40 @@ export class AddressesComponent implements OnInit {
 
   // Form Group
   registerForm: FormGroup = new FormGroup({
-    AddressName: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+    AddressName: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(20),
+      Validators.pattern('^[a-zA-Z ]*$')
+    ]),
 
-    Address: new FormControl(null, [Validators.required]),
+    Address: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(100)
+    ]),
 
-    phoneNumber: new FormControl(null, [Validators.required]),
+    phoneNumber: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('^[0-9]{10,15}$')
+    ]),
 
-    City: new FormControl(null, [Validators.required]),
+    City: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(30),
+      Validators.pattern('^[a-zA-Z ]*$')
+    ]),
   });
 
 
   // Add Address Function
   AddressSubmit(){
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
     this.getAddAdressSub = this._addressService.AddAddress(this.registerForm.value).subscribe({
       next: (res) => {
         this.addingAddress = false;

@@ -6,7 +6,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { headerInterceptor } from './core/Interceptor/header.interceptor';
-import { errorsInterceptor } from './core/Interceptor/errors.interceptor';
+// import { errorsInterceptor } from './core/Interceptor/errors.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './core/Interceptor/loading.interceptor';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -37,7 +37,7 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([
         loadingInterceptor,
         headerInterceptor,
-        errorsInterceptor
+        // errorsInterceptor
       ])
     ),
     importProvidersFrom(

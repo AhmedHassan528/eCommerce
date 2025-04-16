@@ -17,11 +17,49 @@ export const errorsInterceptor: HttpInterceptorFn = (req, next) => {
       
       // Only log errors in development mode
       if (!environment.production) {
-        console.log('Error intercepted:', error);
+        console.log('Error intercepted:', error); // Log to inspect exact error
       }
 
       // Skip error handling for certain URLs or conditions
       if (req.url.includes('background') || req.url.includes('health-check')) {
+        return throwError(() => error);
+      }
+
+      // Block specific errors: fetch failed, aborted, and admin.users.error
+      if (
+        error.message?.toLowerCase().includes('fetch failed') ||
+        error.message?.includes('aborted') ||
+        error.error?.message === 'admin.users.error' // Exact match for admin.users.error
+      ) {
+        console.log('Blocked error:', error.message || error.error?.message); // Temporary log to verify
+        return throwError(() => error);
+      }
+
+      // Handle custom error format
+      if (error.error) {
+        // Handle case with $id, message, and StatusCode
+        if (error.error.$id && error.error.message && error.error.StatusCode) {
+          toastr.error(error.error.message, 'Error!', {
+            timeOut: 3000,
+          });
+          return throwError(() => error);
+        }
+        // Handle case with just message
+        else if (error.error.message) {
+          toastr.error(error.error.message, 'Error!', {
+            timeOut: 3000,
+          });
+          return throwError(() => error);
+        }
+      }
+
+      // Handle network errors (status 0, excluding fetch failures handled above)
+      if (error.status === 0) {
+        if (!req.url.includes('background')) {
+          toastr.error('Network error. Please check your connection and try again.', 'Error!', {
+            timeOut: 3000,
+          });
+        }
         return throwError(() => error);
       }
 
@@ -33,7 +71,6 @@ export const errorsInterceptor: HttpInterceptorFn = (req, next) => {
           break;
 
         case 403:
-          // For 403 errors, only show toastr and navigate if it's a page request
           if (req.url.includes('/api/')) {
             toastr.error('You do not have permission to access this resource', 'Access Denied');
             router.navigate(['/unauthorized']);
@@ -46,7 +83,6 @@ export const errorsInterceptor: HttpInterceptorFn = (req, next) => {
           break;
 
         default:
-          // For other errors, only show toastr for critical errors (500+)
           if (error.status >= 500) {
             const errorMessage = error.error?.message || error.message || 'An unexpected error occurred';
             const errorTitle = error.error?.statusMsg || 'Error';

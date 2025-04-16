@@ -21,7 +21,7 @@ import { AuthService } from '../../../core/services/Auth-Service/auth.service';
 
 @Component({
     selector: 'app-home',
-    imports: [TranslateModule, FormsModule, CarouselModule, KMPSearchPipe, SucceedComponent, ErrorComponent, ProductCardComponent],
+    imports: [TranslateModule, FormsModule, CarouselModule, KMPSearchPipe, ProductCardComponent],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss', '../../../app.component.scss']
 })
@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   // Servier Message
-  ServMessage!: string;
   succeed!: Boolean | null;
 
   // Data
@@ -80,6 +79,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getItemSub = this._Items.getItems().subscribe({
       next: (res) => {
         this.Products = res.$values;
+        this.succeed = null; // Reset error state on success
+      },
+      error: (error) => {
+        // Don't show fetch failed errors
+        if (!error.message?.includes('fetch failed')) {
+          this.succeed = false;
+        }
       }
     });
   }
@@ -87,13 +93,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   // Get Categories
   getCategories(): void {
     this.getCategorySub = this._Categories.getCategories().subscribe({
-
       next: (res) => {
         this.Categories = res.$values;
-        console.log(this.Categories)
-
+        console.log(this.Categories);
+        this.succeed = null; // Reset error state on success
+      },
+      error: (error) => {
+        // Don't show fetch failed errors
+        if (!error.message?.includes('fetch failed')) {
+          this.succeed = false;
+        }
       }
-    })
+    });
   }
 
   // get WishLists
@@ -101,6 +112,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._wishListService.getWishListIDs().subscribe({
       next: (res) => {
         this.WishListIDs = res.ProductsIDs.$values;
+        this.succeed = null; // Reset error state on success
+      },
+      error: (error) => {
+        // Don't show fetch failed errors
+        if (!error.message?.includes('fetch failed')) {
+          this.succeed = false;
+        }
       }
     });
   }

@@ -7,16 +7,22 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class KMPSearchPipe implements PipeTransform {
 
   transform(items: any[], searchTerm:string ): any[] {
-
     if (!items || !searchTerm) {
       return items;
     }
 
-    const kmp = new KMPAlgorithm(searchTerm.toLowerCase());
+    // First try exact ID match
+    const idMatch = items.find(item => item.Id?.toString() === searchTerm);
+    if (idMatch) {
+      return [idMatch];
+    }
 
+    // If no exact ID match, use KMP for partial matches
+    const kmp = new KMPAlgorithm(searchTerm.toLowerCase());
     return items.filter(item => {
-      const title = item.title?.toLowerCase() || '';
-      return kmp.search(title);
+      const id = item.Id?.toString() || '';
+      const title = item.Title?.toLowerCase() || '';
+      return kmp.search(id) || kmp.search(title);
     });
   }
 }

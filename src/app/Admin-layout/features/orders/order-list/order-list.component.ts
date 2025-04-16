@@ -41,7 +41,7 @@ export class OrderListComponent implements OnInit {
         order.statusMess === this.statusFilter;
       
       return matchesSearch && matchesStatus;
-    });
+    }).sort((a, b) => new Date(b.OrderDate).getTime() - new Date(a.OrderDate).getTime());
   }
 
   updateStatus(id: number, status: 'Received' | 'Delivered'|'Canceled'): void {

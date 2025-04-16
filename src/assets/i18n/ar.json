@@ -44,7 +44,20 @@
         "delete": "حذف",
         "add address": "إضافة العنوان",
         "use this address": "استخدام هذا العنوان",
-        "Close modal": "إغلاق النافذة"
+        "Close modal": "إغلاق النافذة",
+        "Add New Address": "إضافة عنوان جديد",
+        "validation": {
+            "name_required": "الاسم مطلوب",
+            "name_min_length": "يجب أن يكون الاسم 3 أحرف على الأقل",
+            "name_pattern": "يمكن أن يحتوي الاسم على أحرف ومسافات فقط",
+            "address_required": "العنوان مطلوب",
+            "address_min_length": "يجب أن يكون العنوان 5 أحرف على الأقل",
+            "phone_required": "رقم الهاتف مطلوب",
+            "phone_pattern": "يجب أن يكون رقم الهاتف من 10 إلى 15 رقمًا",
+            "city_required": "المدينة مطلوبة",
+            "city_min_length": "يجب أن تكون المدينة حرفين على الأقل",
+            "city_pattern": "يمكن أن تحتوي المدينة على أحرف ومسافات فقط"
+        }
     },
     "wishlist": {
         "wishlist": "قائمة الرغبات",
@@ -110,7 +123,10 @@
             "Payment Is Not Paid": "لم يتم الدفع",
             "Total Price": "السعر الإجمالي",
             "Delivered" : "تم التوصيل",
-            "Not Delivered" : "لم يتم التوصيل"
+            "Not Delivered" : "لم يتم التوصيل",
+            "Pending" : "قيد الانتظار",
+            "Received" : "تم الاستلام",
+            "Canceled" : "تم الإلغاء"
         },
     "admin": {
         "dashboard": {
