@@ -17,7 +17,9 @@
     "product": {
         "add to cart": "Add to Cart",
         "egp": "EGP",
-        "no products found": "No Products Found"
+        "no products found": "No Products Found",
+        "brand": "Brand",
+        "category": "Category"
     },
     "cart": {
         "shopping cart": "Shopping Cart",

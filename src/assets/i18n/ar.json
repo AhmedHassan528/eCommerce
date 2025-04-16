@@ -18,7 +18,10 @@
     },
     "product": {
         "add to cart": "أضف إلى السلة",
-        "egp": "جنيه"
+        "egp": "جنيه",
+        "no products found": "لم يتم العثور على منتجات",
+        "brand": "العلامة التجارية",
+        "category": "الفئة"
     },
     "cart": {
         "Do You want to clear all cart !!!" : "هل تريد مسح كل العربة !!!",
