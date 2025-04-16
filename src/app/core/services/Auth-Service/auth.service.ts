@@ -16,7 +16,6 @@ export class AuthService {
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   constructor(private _httpClient: HttpClient) {
-    // Initialize authentication state
     this.isAuthenticatedSubject.next(!!this.getToken());
   }
 
@@ -25,7 +24,8 @@ export class AuthService {
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.getToken()}`,
-      'tenant': "linkedIn"
+      'tenant': "linkedIn",
+      'ReqUrl': 'http://localhost:4200/reset-password'
     });
   }
 
@@ -48,26 +48,27 @@ export class AuthService {
     }
   }
 
-  forgotPasswords(user: object): Observable<any> {
-    {
-      return this._httpClient.post(`${RouteUrl}/api/auth/ForgotPassword`, user, { headers: this.getHeaders() })
-    }
+  
+  forgotPasswords(email: string): Observable<any> {
+    return this._httpClient.post(`${RouteUrl}/api/auth/ForgotPassword`, `"${email}"`, { 
+      headers: this.getHeaders(),
+      responseType: 'text' as 'json'
+    });
   }
 
-  ResetCode(user: string): Observable<any> {
-    return this._httpClient.post(`${RouteUrl}/api/auth/verifyResetCode`,
-      {
-        "resetCode": user
-      }
-    );
-  }
+
 
 
   ResetPassword(user: object): Observable<any> {
     const headers = new HttpHeaders({
-      'tenant': this.tenant
+      'tenant': this.tenant,
+      'Content-Type': 'application/json',
+      'ReqUrl': 'http://localhost:4200/reset-password'
     });
-    return this._httpClient.put(`${RouteUrl}/api/auth/resetPassword`, user, { headers });
+    return this._httpClient.post(`${RouteUrl}/api/auth/ForgotPasswordConfermation`, user, { 
+      headers,
+      responseType: 'text'
+    });
   }
 
   confirmEmail(userId: string, token: string): Observable<any> {

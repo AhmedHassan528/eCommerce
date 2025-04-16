@@ -100,7 +100,16 @@
         "Send Reset Code": "Send Reset Code",
         "Reset Code": "Reset Code",
         "Enter your Reset Code": "Enter your Reset Code",
-        "confirme": "Confirme"
+        "confirme": "Confirme",
+        "Success": "Success",
+        "Error": "Error",
+        "Please check your email for the reset code": "Please check your email for the reset code",
+        "We have sent a password reset link to your email address": "We have sent a password reset link to your email address",
+        "Please check your inbox and follow the instructions": "Please check your inbox and follow the instructions",
+        "New Password": "New Password",
+        "Confirm Password": "Confirm Password",
+        "FirstName": "First Name",
+        "LastName": "Last Name"
     },
     "Footer": {
         "Get The FreshCart App": "Get The FreshCart App",

@@ -101,7 +101,16 @@
         "Send Reset Code": "إرسال رمز إعادة التعيين",
         "Reset Code": "رمز إعادة التعيين",
         "Enter your Reset Code": "أدخل رمز إعادة التعيين",
-        "confirme": "تأكيد"
+        "confirme": "تأكيد",
+        "Success": "نجاح",
+        "Error": "خطأ",
+        "Please check your email for the reset code": "يرجى التحقق من بريدك الإلكتروني للحصول على رمز إعادة التعيين",
+        "We have sent a password reset link to your email address": "لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني",
+        "Please check your inbox and follow the instructions": "يرجى التحقق من صندوق الوارد الخاص بك واتباع التعليمات",
+        "New Password": "كلمة المرور الجديدة",
+        "Confirm Password": "تأكيد كلمة المرور",
+        "FirstName": "الاسم الأول",
+        "LastName": "الاسم الأخير"
     },
     "Footer": {
         "Get The FreshCart App": "احصل على تطبيق FreshCart",

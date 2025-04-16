@@ -44,9 +44,9 @@ export const routes: Routes = [
     {path: "address/:id", component: AddressesComponent , canActivate: [authGuard]},
     {path: "Payment", component: PaymentComponent},
     {path: "login", component: LoginComponent, canActivate: [logedGuard]},
-    {path: "ConfirmEmail", component: ConfirmEmailComponent, canActivate: [logedGuard] },
+    {path: "ConfirmEmail", component: ConfirmEmailComponent, canActivate: [logedGuard]},
     {path: "ForgetPassword", component: ForgetPasswordComponent, canActivate: [logedGuard]},
-    {path: "reset-password", component: ResetPasswordComponent, canActivate: [logedGuard]},
+    {path: "reset-password/ConfirmEmail", component: ResetPasswordComponent, canActivate: [logedGuard]},
     {path: "register", component: RegisterComponent , canActivate: [logedGuard] },
     {path: "not-found", component: NotFoundComponent},
     {path: "unauthorized", component: UnauthorizedComponent},
@@ -63,6 +63,5 @@ export const routes: Routes = [
             { path: 'users', component: UserListComponent }
         ]
     },
-
     {path: "**", component: HomeComponent}
 ];
